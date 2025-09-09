@@ -74,7 +74,7 @@ const HomePage = () => {
   const processMessageFrontend = (message, profileData) => {
     const input = message.toLowerCase();
     
-    // Handle video requests FIRST - before common questions
+    // Handle video requests FIRST
     if (input.includes('video') || input.includes('youtube') || input.includes('testing videos') || 
         input.includes('show me') || input.includes('show') || input.includes('videos')) {
       return {
@@ -87,7 +87,20 @@ const HomePage = () => {
       };
     }
     
-    // Check common questions after video/article checks
+    // Handle article requests SECOND - before common questions
+    if (input.includes('article') || input.includes('medium') || input.includes('written') || 
+        input.includes('what articles') || input.includes('articles have you')) {
+      return {
+        id: Date.now(),
+        type: 'bot',
+        content: "Here are my articles on testing and product development:",
+        timestamp: new Date(),
+        articles: profileData.mediumPosts,
+        source: 'articles'
+      };
+    }
+    
+    // Check common questions AFTER video/article checks
     const commonMatch = profileData?.commonQuestions?.find(qa => 
       input.includes(qa.question.toLowerCase().split(' ')[0]) ||
       (input.includes('who are you') && qa.question.includes('who are you')) ||
@@ -104,19 +117,6 @@ const HomePage = () => {
         content: commonMatch.response,
         timestamp: new Date(),
         source: 'common-question'
-      };
-    }
-    
-    // Handle article requests
-    if (input.includes('article') || input.includes('medium') || input.includes('written') || 
-        input.includes('what articles') || input.includes('articles have you')) {
-      return {
-        id: Date.now(),
-        type: 'bot',
-        content: "Here are my articles on testing and product development:",
-        timestamp: new Date(),
-        articles: profileData.mediumPosts,
-        source: 'articles'
       };
     }
     
