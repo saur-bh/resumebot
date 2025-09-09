@@ -5,7 +5,6 @@ export const demoProfile = {
   bio: "I'm Saurabh, a QA Engineer and Product Builder with hands-on experience in ensuring software quality through manual testing, automation frameworks, and release management. I have worked across web, mobile, and backend systems, creating structured QA processes and integrating tools like Playwright, Appium, BrowserStack, Postman, Jira, and GitHub Actions.",
   profilePhoto: "/myphoto.png",
   email: "saurabh-verma@outlook.com",
-  personalWebsite: "https://saur-bh.github.io/me/",
   resumeDownload: "/Resume.pdf",
   skills: [
     "Selenium WebDriver",

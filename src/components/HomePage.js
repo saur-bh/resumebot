@@ -300,7 +300,7 @@ const HomePage = () => {
               <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                 <img 
                   src="/myphoto.png" 
-                  alt="Saurabh QA" 
+                  alt="Saurabh Verma" 
                   className="w-8 h-8 rounded-full object-cover"
                   onError={(e) => {
                     e.target.style.display = 'none';
@@ -308,7 +308,7 @@ const HomePage = () => {
                 />
               </div>
               <div>
-                <h3 className="font-semibold text-lg">Saurabh QA</h3>
+                <h3 className="font-semibold text-lg">Saurabh Verma</h3>
                 <p className="text-sm opacity-90">QA Engineer & Product Builder</p>
               </div>
               <div className="ml-auto flex items-center space-x-2">
