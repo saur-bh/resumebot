@@ -6,13 +6,13 @@ const SimpleBackground = () => {
     <div className="fixed inset-0 -z-10 overflow-hidden">
       {/* Animated gradient background */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-soft-lavender via-muted-beige to-cloud-white"
+        className="absolute inset-0 bg-gradient-to-br from-soft-lavender via-chat-bg to-cloud-white"
         animate={{
           background: [
-            "linear-gradient(135deg, #D9CCEC 0%, #FAF5ED 50%, #F7F9FB 100%)",
-            "linear-gradient(135deg, #F7F9FB 0%, #D9CCEC 50%, #FAF5ED 100%)",
-            "linear-gradient(135deg, #FAF5ED 0%, #F7F9FB 50%, #D9CCEC 100%)",
-            "linear-gradient(135deg, #D9CCEC 0%, #FAF5ED 50%, #F7F9FB 100%)"
+            "linear-gradient(135deg, #E0E7FF 0%, #F1F5F9 50%, #FFFFFF 100%)",
+            "linear-gradient(135deg, #FFFFFF 0%, #E0E7FF 50%, #F1F5F9 100%)",
+            "linear-gradient(135deg, #F1F5F9 0%, #FFFFFF 50%, #E0E7FF 100%)",
+            "linear-gradient(135deg, #E0E7FF 0%, #F1F5F9 50%, #FFFFFF 100%)"
           ]
         }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -25,7 +25,7 @@ const SimpleBackground = () => {
             key={i}
             className="absolute w-32 h-32 rounded-full opacity-10"
             style={{
-              background: i % 2 === 0 ? '#8C5BAA' : '#58AEDA',
+              background: i % 2 === 0 ? '#6366F1' : '#3B82F6',
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
@@ -48,8 +48,8 @@ const SimpleBackground = () => {
       <div 
         className="absolute inset-0 opacity-5"
         style={{
-          backgroundImage: `radial-gradient(circle at 25% 25%, #8C5BAA 2px, transparent 2px),
-                           radial-gradient(circle at 75% 75%, #58AEDA 2px, transparent 2px)`,
+          backgroundImage: `radial-gradient(circle at 25% 25%, #6366F1 2px, transparent 2px),
+                           radial-gradient(circle at 75% 75%, #3B82F6 2px, transparent 2px)`,
           backgroundSize: '50px 50px',
           backgroundPosition: '0 0, 25px 25px',
         }}

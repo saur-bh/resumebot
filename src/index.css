@@ -8,7 +8,7 @@
   }
   
   body {
-    @apply bg-muted-beige text-deep-brown;
+    @apply bg-chat-bg text-deep-brown;
   }
 }
 
@@ -34,11 +34,11 @@
   }
   
   .chat-bubble-user {
-    @apply bg-sarya-purple text-white ml-auto;
+    @apply bg-chat-user text-white ml-auto shadow-lg;
   }
   
   .chat-bubble-bot {
-    @apply bg-cloud-white text-deep-brown border border-gray-100;
+    @apply bg-chat-bot text-deep-brown border border-gray-200 shadow-md;
   }
 }
 

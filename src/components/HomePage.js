@@ -161,7 +161,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-muted-beige relative overflow-hidden">
+    <div className="min-h-screen bg-chat-bg relative overflow-hidden">
       <SimpleBackground />
       
       {/* Header */}

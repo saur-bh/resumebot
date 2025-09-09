@@ -3,7 +3,7 @@ export const demoProfile = {
   name: "Saurabh",
   title: "Senior QA Engineer & Automation Specialist",
   bio: "I'm Saurabh, a passionate QA Engineer who specializes in creating robust testing frameworks and ensuring software quality. I love automation testing, CI/CD pipelines, and building scalable test solutions.",
-  profilePhoto: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+  profilePhoto: "/myphoto.png",
   skills: [
     "Selenium WebDriver",
     "Cypress",
