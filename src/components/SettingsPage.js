@@ -49,7 +49,10 @@ const SettingsPage = ({ user }) => {
       apiKey: '',
       model: 'gpt-3.5-turbo'
     },
-    youtubeVideos: []
+    youtubeVideos: [],
+    profilePhoto: '',
+    resumeContent: '',
+    commonQuestions: []
   });
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -220,6 +223,31 @@ const SettingsPage = ({ user }) => {
                   placeholder="Tell us about yourself..."
                 />
               </div>
+              
+              <div className="mt-4">
+                <label className="block text-sm font-medium text-deep-brown mb-2">
+                  Profile Photo URL
+                </label>
+                <input
+                  type="url"
+                  value={profileData.profilePhoto}
+                  onChange={(e) => setProfileData(prev => ({ ...prev, profilePhoto: e.target.value }))}
+                  className="input-field"
+                  placeholder="https://example.com/your-photo.jpg"
+                />
+                {profileData.profilePhoto && (
+                  <div className="mt-2">
+                    <img
+                      src={profileData.profilePhoto}
+                      alt="Profile preview"
+                      className="w-16 h-16 rounded-full object-cover border-2 border-sarya-purple"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
             </motion.div>
 
             {/* Skills */}
@@ -307,6 +335,21 @@ const SettingsPage = ({ user }) => {
                     className="input-field h-32 resize-none"
                     placeholder="Describe your projects..."
                   />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-deep-brown mb-2">
+                    Resume Content (for AI processing)
+                  </label>
+                  <textarea
+                    value={profileData.resumeContent}
+                    onChange={(e) => setProfileData(prev => ({ ...prev, resumeContent: e.target.value }))}
+                    className="input-field h-40 resize-none"
+                    placeholder="Paste your resume content here for AI to process and answer questions about it..."
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    This content will be sent to the AI model to help answer questions about your resume
+                  </p>
                 </div>
               </div>
             </motion.div>

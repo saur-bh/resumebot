@@ -26,13 +26,13 @@ const HomePage = () => {
       {
         id: 1,
         type: 'bot',
-        content: "Hello! I'm your interactive resume chatbot. Ask me anything about my experience, skills, projects, or how I work! You can type or use voice input.",
+        content: `Hello! I'm Saurabh, your interactive resume chatbot. Ask me anything about my QA engineering experience, skills, projects, or how I work! You can type or use voice input.`,
         timestamp: new Date(),
         suggestions: [
-          "Tell me about your experience",
-          "What are your technical skills?",
-          "Show me your automation testing process",
-          "What projects have you worked on?"
+          "Who are you?",
+          "What do you do?",
+          "What are your skills?",
+          "Tell me about your experience"
         ]
       }
     ]);
@@ -173,10 +173,25 @@ const HomePage = () => {
               animate={{ opacity: 1, x: 0 }}
               className="flex items-center space-x-3"
             >
-              <div className="w-10 h-10 bg-gradient-to-r from-sarya-purple to-sky-blue rounded-full flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-white" />
+              <div className="relative">
+                {profileData?.profilePhoto ? (
+                  <img
+                    src={profileData.profilePhoto}
+                    alt={profileData.name || 'Profile'}
+                    className="w-10 h-10 rounded-full object-cover border-2 border-sarya-purple"
+                  />
+                ) : (
+                  <div className="w-10 h-10 bg-gradient-to-r from-sarya-purple to-sky-blue rounded-full flex items-center justify-center">
+                    <Sparkles className="w-6 h-6 text-white" />
+                  </div>
+                )}
               </div>
-              <h1 className="text-xl font-bold text-deep-brown">Resume Chatbot</h1>
+              <div>
+                <h1 className="text-xl font-bold text-deep-brown">
+                  {profileData?.name ? `${profileData.name}'s Chatbot` : 'Resume Chatbot'}
+                </h1>
+                <p className="text-sm text-gray-600">{profileData?.title || 'QA Engineer'}</p>
+              </div>
             </motion.div>
             
             <Link to="/settings">

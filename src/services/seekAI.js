@@ -39,7 +39,12 @@ export const sendToAI = async (message, context = {}, apiSettings = {}) => {
           messages: [
             {
               role: 'system',
-              content: `You are a helpful assistant representing a professional. Use the following context to answer questions about their experience, skills, and projects: ${JSON.stringify(context.profileData)}`
+              content: `You are Saurabh, a Senior QA Engineer and Automation Specialist. Use the following context to answer questions about your experience, skills, and projects. Always respond as "I" (first person) since you are representing Saurabh.
+
+Profile Data: ${JSON.stringify(context.profileData)}
+Resume Content: ${context.resumeContent || 'No resume content available'}
+
+Always be personal and professional, speaking as Saurabh the QA Engineer.`
             },
             {
               role: 'user',
@@ -58,7 +63,12 @@ export const sendToAI = async (message, context = {}, apiSettings = {}) => {
           messages: [
             {
               role: 'system',
-              content: `You are a helpful assistant representing a professional. Use the following context to answer questions about their experience, skills, and projects: ${JSON.stringify(context.profileData)}`
+              content: `You are Saurabh, a Senior QA Engineer and Automation Specialist. Use the following context to answer questions about your experience, skills, and projects. Always respond as "I" (first person) since you are representing Saurabh.
+
+Profile Data: ${JSON.stringify(context.profileData)}
+Resume Content: ${context.resumeContent || 'No resume content available'}
+
+Always be personal and professional, speaking as Saurabh the QA Engineer.`
             },
             {
               role: 'user',
@@ -74,7 +84,14 @@ export const sendToAI = async (message, context = {}, apiSettings = {}) => {
         requestBody = {
           contents: [{
             parts: [{
-              text: `Context: ${JSON.stringify(context.profileData)}\n\nUser: ${message}\n\nRespond as a helpful assistant representing this professional.`
+              text: `You are Saurabh, a Senior QA Engineer and Automation Specialist. Use the following context to answer questions about your experience, skills, and projects. Always respond as "I" (first person) since you are representing Saurabh.
+
+Profile Data: ${JSON.stringify(context.profileData)}
+Resume Content: ${context.resumeContent || 'No resume content available'}
+
+User: ${message}
+
+Always be personal and professional, speaking as Saurabh the QA Engineer.`
             }]
           }],
           generationConfig: {
@@ -137,18 +154,20 @@ export const sendToAI = async (message, context = {}, apiSettings = {}) => {
 const generateFallbackResponse = (message) => {
   const input = message.toLowerCase();
   
-  if (input.includes('experience') || input.includes('background')) {
-    return "I have extensive experience in software testing and automation. I specialize in creating robust test frameworks, implementing CI/CD pipelines, and ensuring high-quality software delivery.";
+  if (input.includes('who are you') || input.includes('introduce')) {
+    return "I'm Saurabh, a Senior QA Engineer and Automation Specialist. I'm passionate about creating robust testing frameworks and ensuring software quality. I specialize in automation testing, CI/CD pipelines, and building scalable test solutions.";
+  } else if (input.includes('experience') || input.includes('background')) {
+    return "I have over 5 years of experience in software testing and quality assurance. I've led automation testing initiatives, built comprehensive test frameworks, implemented CI/CD pipelines, and mentored junior QA engineers.";
   } else if (input.includes('skill') || input.includes('technical')) {
-    return "My technical skills include testing frameworks like Selenium and Cypress, programming languages like JavaScript and Python, and cloud platforms like AWS and Azure.";
+    return "My technical skills include Selenium WebDriver, Cypress, Jest, JavaScript, Python, Java, TestNG, Jenkins, GitHub Actions, Docker, AWS, Azure, Postman, Appium, API Testing, Performance Testing, and Mobile Testing.";
   } else if (input.includes('automation') || input.includes('testing process')) {
-    return "My automation testing process involves test planning, framework design, implementation, CI/CD integration, reporting, and continuous maintenance.";
+    return "My automation testing process involves test planning, framework design, implementation, CI/CD integration, detailed reporting, and continuous maintenance. I focus on creating scalable and maintainable test solutions.";
   } else if (input.includes('project')) {
-    return "I've worked on several exciting projects including e-commerce platform testing, mobile app testing, API testing frameworks, and performance testing implementations.";
+    return "I've worked on several exciting projects including e-commerce platform testing, mobile app testing, API testing frameworks, and performance testing implementations. Each project has helped me grow as a QA engineer.";
   } else if (input.includes('contact') || input.includes('reach')) {
-    return "You can reach me through email, LinkedIn, GitHub, or my portfolio website. I'm always open to discussing new opportunities!";
+    return "You can reach me through email at saurabh.sept06@gmail.com, LinkedIn, GitHub, or my portfolio website. I'm always open to discussing new opportunities and collaborations!";
   } else {
-    return "That's an interesting question! I'd be happy to discuss this further. Could you be more specific about what you'd like to know?";
+    return "That's an interesting question! As a QA Engineer, I'd be happy to discuss this further. Could you be more specific about what you'd like to know about my experience or skills?";
   }
 };
 
@@ -210,6 +229,44 @@ const generateFileSummary = (processedFiles) => {
 };
 
 /**
+ * Check if message matches common questions
+ * @param {string} message - User message
+ * @param {Array} commonQuestions - Array of common questions
+ * @returns {Object|null} - Matching question or null
+ */
+const checkCommonQuestions = (message, commonQuestions = []) => {
+  const normalizedMessage = message.toLowerCase().trim();
+  
+  for (const qa of commonQuestions) {
+    const normalizedQuestion = qa.question.toLowerCase().trim();
+    
+    // Exact match
+    if (normalizedMessage === normalizedQuestion) {
+      return qa;
+    }
+    
+    // Partial match for common variations
+    if (normalizedMessage.includes('who are you') && normalizedQuestion.includes('who are you')) {
+      return qa;
+    }
+    if (normalizedMessage.includes('what do you do') && normalizedQuestion.includes('what do you do')) {
+      return qa;
+    }
+    if (normalizedMessage.includes('your skills') && normalizedQuestion.includes('skills')) {
+      return qa;
+    }
+    if (normalizedMessage.includes('your experience') && normalizedQuestion.includes('experience')) {
+      return qa;
+    }
+    if (normalizedMessage.includes('how do you') && normalizedQuestion.includes('how do you')) {
+      return qa;
+    }
+  }
+  
+  return null;
+};
+
+/**
  * Enhanced message processing with AI
  * @param {string} message - User message
  * @param {Object} profileData - User profile data
@@ -218,10 +275,24 @@ const generateFileSummary = (processedFiles) => {
  * @returns {Promise<Object>} - Enhanced response
  */
 export const processMessageWithAI = async (message, profileData, conversationHistory, uploadedFiles) => {
+  // First check if it's a common question
+  const commonMatch = checkCommonQuestions(message, profileData?.commonQuestions || []);
+  
+  if (commonMatch) {
+    return {
+      id: Date.now(),
+      type: 'bot',
+      content: commonMatch.response,
+      timestamp: new Date(),
+      source: 'common-question',
+    };
+  }
+
   const context = {
     profileData,
     conversationHistory: conversationHistory.slice(-10), // Last 10 messages for context
     uploadedFiles: processFilesForSeek(uploadedFiles),
+    resumeContent: profileData?.resumeContent || '',
   };
 
   const apiSettings = profileData?.apiSettings || {};
