@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Sparkles, Bot, Mic, MicOff, Download } from 'lucide-react';
 import ChatMessage from './ChatMessage';
-import SimpleBackground from './SimpleBackground';
 import { demoProfile } from '../data/demoProfile';
 
 const HomePage = () => {
