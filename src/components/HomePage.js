@@ -60,6 +60,13 @@ const HomePage = () => {
           "What are your skills?",
           "How do you approach testing?"
         ];
+      case 'website':
+        return [
+          "Show me your testing videos",
+          "What articles have you written?",
+          "What are your skills?",
+          "How do you approach testing?"
+        ];
       case 'common-question':
         return [
           "Show me your testing videos",
@@ -121,6 +128,23 @@ const HomePage = () => {
         videos: profileData.youtubeVideos,
         source: 'videos',
         suggestions: getDynamicSuggestions('bot', 'videos')
+      };
+    }
+    
+    // Handle personal website requests
+    if (input.includes('personal website') || input.includes('website') || input.includes('portfolio')) {
+      return {
+        id: Date.now(),
+        type: 'bot',
+        content: "🌐 **Here's my personal website!** Built with pure HTML, CSS, and JavaScript - no frameworks, just web fundamentals. Perfect for understanding how the web actually works!",
+        timestamp: new Date(),
+        website: {
+          url: 'https://saur-bh.github.io/me/',
+          title: 'Saurabh\'s Personal Website',
+          description: 'Pure HTML/CSS/JS showcase'
+        },
+        source: 'website',
+        suggestions: getDynamicSuggestions('bot', 'website')
       };
     }
     
@@ -384,7 +408,8 @@ const HomePage = () => {
                   key={index}
                   onClick={() => {
                     if (action === 'Personal website') {
-                      window.location.href = 'https://saur-bh.github.io/me/';
+                      setInputValue('Show me your personal website');
+                      handleSendMessage();
                     } else {
                       setInputValue(action);
                     }

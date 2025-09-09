@@ -214,6 +214,49 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
                   </div>
                 )}
                 
+                {/* Display Website Webview */}
+                {message.website && (
+                  <div className="mt-4 p-4 bg-gradient-to-r from-soft-lavender/30 to-cloud-white rounded-xl border border-gray-100">
+                    <div className="flex items-center space-x-2 mb-3">
+                      <span className="text-lg">🌐</span>
+                      <span className="text-sm font-medium text-deep-brown">Personal Website Preview</span>
+                    </div>
+                    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
+                      <div className="bg-gray-100 px-4 py-2 border-b border-gray-200 flex items-center space-x-2">
+                        <div className="flex space-x-1">
+                          <div className="w-3 h-3 bg-red-400 rounded-full"></div>
+                          <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                          <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                        </div>
+                        <div className="flex-1 bg-white rounded px-2 py-1 text-xs text-gray-600">
+                          {message.website.url}
+                        </div>
+                      </div>
+                      <div className="h-96">
+                        <iframe
+                          src={message.website.url}
+                          title={message.website.title}
+                          className="w-full h-full border-0"
+                          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                    <div className="mt-3 flex items-center justify-between">
+                      <p className="text-xs text-gray-600">{message.website.description}</p>
+                      <a 
+                        href={message.website.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center space-x-1 px-3 py-1 bg-sarya-purple text-white text-xs rounded-full hover:bg-accent-purple transition-colors"
+                      >
+                        <ExternalLink className="w-3 h-3" />
+                        <span>Open Full Site</span>
+                      </a>
+                    </div>
+                  </div>
+                )}
+                
                 {/* Display Articles */}
                 {message.articles && message.articles.length > 0 && (
                   <div className="mt-4 space-y-4">
