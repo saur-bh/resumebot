@@ -26,7 +26,7 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
           ) : (
             <img 
               src="/myphoto.png" 
-              alt="Saurabh QA" 
+              alt="Saurabh Verma" 
               className="w-8 h-8 rounded-full object-cover"
               onError={(e) => {
                 e.target.style.display = 'none';
@@ -259,23 +259,23 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
                 
                 {/* Display Articles */}
                 {message.articles && message.articles.length > 0 && (
-                  <div className="mt-4 space-y-4">
-                    {message.articles.map((article) => (
-                      <div key={article.id} className="border border-gray-200 rounded-xl p-4 bg-gradient-to-r from-white to-gray-50 shadow-sm hover:shadow-md transition-all duration-200">
-                        <div className="flex items-start space-x-4">
-                          <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75S24 8.83 24 12z"/>
-                            </svg>
-                          </div>
-                          <div className="flex-1">
-                            <h4 className="font-semibold text-deep-brown text-lg mb-2 leading-tight">{article.title}</h4>
+                  <div className="mt-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {message.articles.map((article) => (
+                        <div key={article.id} className="border border-gray-200 rounded-xl p-4 bg-gradient-to-r from-white to-gray-50 shadow-sm hover:shadow-md transition-all duration-200">
+                          <div className="flex flex-col items-center text-center">
+                            <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center flex-shrink-0 mb-3">
+                              <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75S24 8.83 24 12z"/>
+                              </svg>
+                            </div>
+                            <h4 className="font-semibold text-deep-brown text-base mb-2 leading-tight">{article.title}</h4>
                             <p className="text-gray-600 text-sm mb-3">{article.description}</p>
                             <a 
                               href={article.url} 
                               target="_blank" 
                               rel="noopener noreferrer"
-                              className="inline-flex items-center space-x-2 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors text-sm font-medium"
+                              className="inline-flex items-center space-x-2 px-3 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors text-sm font-medium"
                             >
                               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75S24 8.83 24 12z"/>
@@ -284,8 +284,8 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
                             </a>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
