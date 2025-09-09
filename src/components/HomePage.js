@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Sparkles, Bot, Mic, MicOff } from 'lucide-react';
+import { Send, Sparkles, Bot, Mic, MicOff, Download } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ChatMessage from './ChatMessage';
 import SimpleBackground from './SimpleBackground';
@@ -156,6 +156,15 @@ const HomePage = () => {
     setInputValue(suggestion);
   };
 
+  const handleDownloadResume = () => {
+    const link = document.createElement('a');
+    link.href = '/Resume.pdf';
+    link.download = 'Saurabh_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const toggleListening = () => {
     if (isListening) {
       recognitionRef.current.stop();
@@ -194,12 +203,22 @@ const HomePage = () => {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-deep-brown">
-                  {profileData?.name ? `${profileData.name}'s Chatbot` : 'Resume Chatbot'}
+                  Saurabh QA
                 </h1>
-                <p className="text-sm text-gray-600">{profileData?.title || 'QA Engineer'}</p>
+                <p className="text-sm text-gray-600">Interactive Resume Chatbot</p>
               </div>
             </motion.div>
             
+            {/* Download Resume Button */}
+            <motion.button
+              onClick={handleDownloadResume}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center space-x-2 px-4 py-2 bg-sarya-purple text-white rounded-lg hover:bg-opacity-90 transition-colors shadow-sm"
+            >
+              <Download className="w-4 h-4" />
+              <span className="text-sm font-medium">Resume</span>
+            </motion.button>
           </div>
         </div>
       </header>
@@ -209,10 +228,10 @@ const HomePage = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="card min-h-[600px] flex flex-col"
+          className="bg-white rounded-2xl shadow-xl border border-gray-100 min-h-[600px] flex flex-col overflow-hidden"
         >
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto space-y-4 mb-6">
+          <div className="flex-1 overflow-y-auto space-y-4 p-6">
             <AnimatePresence>
               {messages.map((message) => (
                 <ChatMessage
@@ -242,7 +261,7 @@ const HomePage = () => {
           </div>
 
           {/* Input Area */}
-          <div className="border-t border-gray-200 pt-4">
+          <div className="border-t border-gray-100 bg-gray-50 p-4">
             <div className="flex space-x-3">
               <div className="flex-1 relative">
                 <input
@@ -251,7 +270,7 @@ const HomePage = () => {
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                   placeholder="Ask me anything about my experience, skills, or projects..."
-                  className="input-field pr-20"
+                  className="w-full px-4 py-3 pr-20 bg-white border border-gray-200 rounded-xl focus:border-sarya-purple focus:ring-2 focus:ring-sarya-purple focus:ring-opacity-20 transition-all duration-200 text-sm"
                 />
                 <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex space-x-1">
                   {speechSupported && (

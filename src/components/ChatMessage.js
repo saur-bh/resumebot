@@ -16,15 +16,23 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
     >
       <div className={`flex items-start space-x-3 max-w-[80%] ${isUser ? 'flex-row-reverse space-x-reverse' : ''}`}>
         {/* Avatar */}
-        <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+        <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
           isUser 
             ? 'bg-sarya-purple' 
-            : 'bg-gradient-to-r from-sky-blue to-grass-green'
+            : 'bg-white border-2 border-sarya-purple'
         }`}>
           {isUser ? (
             <User className="w-5 h-5 text-white" />
           ) : (
-            <Bot className="w-5 h-5 text-white" />
+            <img 
+              src="/myphoto.png" 
+              alt="Saurabh QA" 
+              className="w-8 h-8 rounded-full object-cover"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'block';
+              }}
+            />
           )}
         </div>
 
@@ -51,36 +59,32 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
                 
                 {/* Display Videos */}
                 {message.videos && message.videos.length > 0 && (
-                  <div className="mt-4 space-y-3">
+                  <div className="mt-4 space-y-4">
+                    <h3 className="text-lg font-semibold text-deep-brown mb-3">🎥 My Testing Videos</h3>
                     {message.videos.map((video) => (
-                      <div key={video.id} className="border border-gray-200 rounded-lg p-3 bg-white">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-16 h-12 bg-gray-100 rounded flex items-center justify-center">
-                            <Video className="w-6 h-6 text-gray-500" />
-                          </div>
-                          <div className="flex-1">
-                            <h4 className="font-medium text-deep-brown text-sm">{video.title}</h4>
-                            <a 
-                              href={video.url} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="text-sarya-purple text-xs hover:underline flex items-center space-x-1"
-                            >
-                              <span>Watch on YouTube</span>
-                              <ExternalLink className="w-3 h-3" />
-                            </a>
-                          </div>
+                      <div key={video.id} className="border border-gray-200 rounded-xl p-4 bg-gradient-to-r from-white to-gray-50 shadow-sm hover:shadow-md transition-shadow">
+                        <div className="mb-3">
+                          <h4 className="font-semibold text-deep-brown text-base mb-1">{video.title}</h4>
+                          <a 
+                            href={video.url} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-sarya-purple text-sm hover:underline flex items-center space-x-1 inline-flex"
+                          >
+                            <span>Watch on YouTube</span>
+                            <ExternalLink className="w-4 h-4" />
+                          </a>
                         </div>
-                        <div className="mt-2">
+                        <div className="relative">
                           <iframe
                             width="100%"
-                            height="200"
+                            height="220"
                             src={`https://www.youtube.com/embed/${video.videoId}`}
                             title={video.title}
                             frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen
-                            className="rounded"
+                            className="rounded-lg shadow-sm"
                           ></iframe>
                         </div>
                       </div>
@@ -90,24 +94,25 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
                 
                 {/* Display Articles */}
                 {message.articles && message.articles.length > 0 && (
-                  <div className="mt-4 space-y-3">
+                  <div className="mt-4 space-y-4">
+                    <h3 className="text-lg font-semibold text-deep-brown mb-3">📝 My Articles</h3>
                     {message.articles.map((article) => (
-                      <div key={article.id} className="border border-gray-200 rounded-lg p-3 bg-white">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-12 h-12 bg-gray-100 rounded flex items-center justify-center">
-                            <FileText className="w-6 h-6 text-gray-500" />
+                      <div key={article.id} className="border border-gray-200 rounded-xl p-4 bg-gradient-to-r from-white to-gray-50 shadow-sm hover:shadow-md transition-shadow">
+                        <div className="flex items-start space-x-4">
+                          <div className="w-14 h-14 bg-gradient-to-br from-sarya-purple to-sky-blue rounded-lg flex items-center justify-center flex-shrink-0">
+                            <FileText className="w-7 h-7 text-white" />
                           </div>
                           <div className="flex-1">
-                            <h4 className="font-medium text-deep-brown text-sm">{article.title}</h4>
-                            <p className="text-gray-600 text-xs mt-1">{article.description}</p>
+                            <h4 className="font-semibold text-deep-brown text-base mb-2">{article.title}</h4>
+                            <p className="text-gray-600 text-sm mb-3">{article.description}</p>
                             <a 
                               href={article.url} 
                               target="_blank" 
                               rel="noopener noreferrer"
-                              className="text-sarya-purple text-xs hover:underline flex items-center space-x-1 mt-2"
+                              className="text-sarya-purple text-sm hover:underline flex items-center space-x-1 inline-flex font-medium"
                             >
                               <span>Read on Medium</span>
-                              <ExternalLink className="w-3 h-3" />
+                              <ExternalLink className="w-4 h-4" />
                             </a>
                           </div>
                         </div>
@@ -200,15 +205,15 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="flex flex-wrap gap-2 mt-2"
+              className="flex flex-wrap gap-2 mt-3"
             >
               {message.suggestions.map((suggestion, index) => (
                 <motion.button
                   key={index}
                   onClick={() => onSuggestionClick(suggestion)}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="px-3 py-1.5 bg-soft-lavender hover:bg-opacity-80 text-deep-brown text-sm rounded-full transition-colors border border-gray-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-4 py-2 bg-gradient-to-r from-sarya-purple to-sky-blue text-white text-sm rounded-full transition-all duration-200 hover:shadow-md font-medium"
                 >
                   {suggestion}
                 </motion.button>
