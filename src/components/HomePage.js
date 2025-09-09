@@ -108,11 +108,12 @@ const HomePage = () => {
     }
     
     // Handle article requests
-    if (input.includes('article') || input.includes('medium') || input.includes('written')) {
+    if (input.includes('article') || input.includes('medium') || input.includes('written') || 
+        input.includes('what articles') || input.includes('articles have you')) {
       return {
         id: Date.now(),
         type: 'bot',
-        content: "Here are my articles:",
+        content: "Here are my articles on testing and product development:",
         timestamp: new Date(),
         articles: profileData.mediumPosts,
         source: 'articles'
