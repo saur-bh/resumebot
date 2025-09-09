@@ -179,8 +179,11 @@ const generateFallbackResponse = (message) => {
   
   // Check if it's about Saurabh's content
   if (isAboutSaurabh(message)) {
-    // Check for video requests FIRST
-    if (input.includes('video') || input.includes('youtube') || input.includes('show me') || input.includes('show') || input.includes('videos')) {
+    // Check for website requests FIRST
+    if (input.includes('personal website') || input.includes('website') || input.includes('portfolio') ||
+        (input.includes('show me') && input.includes('website'))) {
+      return "🌐 **Here's my personal website!** Built with pure HTML, CSS, and JavaScript - no frameworks, just web fundamentals. Perfect for understanding how the web actually works!\n\n🔗 **Visit**: https://saur-bh.github.io/me/\n\nIt's a great example of how beautiful websites can be built with just the basics! 💻✨";
+    } else if (input.includes('video') || input.includes('youtube') || input.includes('show me') || input.includes('show') || input.includes('videos')) {
       return "I have several YouTube videos showcasing my testing style and automation work:\n\n1. **Cypress with CircleCI** - https://youtu.be/vE_4p5cLDco\n2. **Automating Bot using Simple JavaScript** - https://www.youtube.com/watch?v=hsghaUwMkbg\n3. **Mobile Automation using WebDriverIO** - https://youtu.be/1ODiJi2Sk6Y\n\nThese videos demonstrate my practical approach to automation testing and CI/CD integration.";
     } else if (input.includes('article') || input.includes('medium') || input.includes('written') || 
                input.includes('what articles') || input.includes('articles have you') || input.includes('articles')) {

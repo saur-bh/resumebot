@@ -109,22 +109,9 @@ const HomePage = () => {
   const processMessageFrontend = (message, profileData) => {
     const input = message.toLowerCase();
     
-    // Handle video requests FIRST
-    if (input.includes('video') || input.includes('youtube') || input.includes('testing videos') || 
-        input.includes('show me') || input.includes('show') || input.includes('videos')) {
-      return {
-        id: Date.now(),
-        type: 'bot',
-        content: "Here are my testing videos that showcase my automation expertise:",
-        timestamp: new Date(),
-        videos: profileData.youtubeVideos,
-        source: 'videos',
-        suggestions: getDynamicSuggestions('bot', 'videos')
-      };
-    }
-    
-    // Handle personal website requests
-    if (input.includes('personal website') || input.includes('website') || input.includes('portfolio')) {
+    // Handle personal website requests FIRST - before video detection
+    if (input.includes('personal website') || input.includes('website') || input.includes('portfolio') ||
+        (input.includes('show me') && input.includes('website'))) {
       return {
         id: Date.now(),
         type: 'bot',
@@ -137,6 +124,20 @@ const HomePage = () => {
         },
         source: 'website',
         suggestions: getDynamicSuggestions('bot', 'website')
+      };
+    }
+    
+    // Handle video requests SECOND
+    if (input.includes('video') || input.includes('youtube') || input.includes('testing videos') || 
+        (input.includes('show me') && input.includes('video')) || input.includes('videos')) {
+      return {
+        id: Date.now(),
+        type: 'bot',
+        content: "Here are my testing videos that showcase my automation expertise:",
+        timestamp: new Date(),
+        videos: profileData.youtubeVideos,
+        source: 'videos',
+        suggestions: getDynamicSuggestions('bot', 'videos')
       };
     }
     
