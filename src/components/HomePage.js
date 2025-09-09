@@ -163,9 +163,17 @@ const HomePage = () => {
     return {
       id: Date.now(),
       type: 'bot',
-      content: "I have limited knowledge and focus on my QA engineering experience, testing methodologies, and the content I've shared. I'm not doing web search currently and have limited knowledge about topics outside my expertise, but I'll keep this in mind and update you later. You can also write to me at saurabh-verma@outlook.com for more detailed discussions!",
+      content: "🤔 **That's an interesting question!**\n\nI'm designed to focus on my QA engineering expertise and the content I've shared. While I don't have web search capabilities, I'd love to help you with:\n\n**🎯 What I Can Help With:**\n• My testing experience and methodologies\n• My automation videos and articles\n• My skills and technical background\n• My approach to quality assurance\n• How to download my resume\n• Connecting with me directly\n\n**💬 Let's Chat!**\nFor topics outside my current knowledge, feel free to reach out to me directly at **saurabh-verma@outlook.com** - I'd be happy to discuss anything in detail! 😊\n\n**🚀 Try asking me about:**\n• \"Who are you?\"\n• \"Show me your testing videos\"\n• \"What are your skills?\"\n• \"How do you approach testing?\"",
       timestamp: new Date(),
-      source: 'fallback'
+      source: 'fallback',
+      suggestions: [
+        "Who are you?",
+        "Show me your testing videos", 
+        "What are your skills?",
+        "How do you approach testing?",
+        "Show me your personal website",
+        "Can I download your resume?"
+      ]
     };
   };
 
