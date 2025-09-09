@@ -60,32 +60,52 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
                 {/* Display Videos */}
                 {message.videos && message.videos.length > 0 && (
                   <div className="mt-4 space-y-4">
-                    <h3 className="text-lg font-semibold text-deep-brown mb-3">🎥 My Testing Videos</h3>
                     {message.videos.map((video) => (
-                      <div key={video.id} className="border border-gray-200 rounded-xl p-4 bg-gradient-to-r from-white to-gray-50 shadow-sm hover:shadow-md transition-shadow">
-                        <div className="mb-3">
-                          <h4 className="font-semibold text-deep-brown text-base mb-1">{video.title}</h4>
-                          <a 
-                            href={video.url} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="text-sarya-purple text-sm hover:underline flex items-center space-x-1 inline-flex"
-                          >
-                            <span>Watch on YouTube</span>
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
-                        </div>
-                        <div className="relative">
-                          <iframe
-                            width="100%"
-                            height="220"
-                            src={`https://www.youtube.com/embed/${video.videoId}`}
-                            title={video.title}
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                            className="rounded-lg shadow-sm"
-                          ></iframe>
+                      <div key={video.id} className="border border-gray-200 rounded-xl p-4 bg-gradient-to-r from-white to-gray-50 shadow-sm hover:shadow-md transition-all duration-200">
+                        <div className="flex items-start space-x-4">
+                          {/* YouTube Thumbnail */}
+                          <div className="relative flex-shrink-0">
+                            <a 
+                              href={video.url} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="block"
+                            >
+                              <img
+                                src={`https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`}
+                                alt={video.title}
+                                className="w-48 h-36 object-cover rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                                onError={(e) => {
+                                  e.target.src = `https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`;
+                                }}
+                              />
+                              {/* Play Button Overlay */}
+                              <div className="absolute inset-0 flex items-center justify-center">
+                                <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center shadow-lg hover:bg-red-700 transition-colors">
+                                  <svg className="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"/>
+                                  </svg>
+                                </div>
+                              </div>
+                            </a>
+                          </div>
+                          
+                          {/* Video Info */}
+                          <div className="flex-1">
+                            <h4 className="font-semibold text-deep-brown text-lg mb-2 leading-tight">{video.title}</h4>
+                            <p className="text-gray-600 text-sm mb-3">Click the thumbnail to watch on YouTube</p>
+                            <a 
+                              href={video.url} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center space-x-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm font-medium"
+                            >
+                              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                              </svg>
+                              <span>Watch on YouTube</span>
+                            </a>
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -95,24 +115,27 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
                 {/* Display Articles */}
                 {message.articles && message.articles.length > 0 && (
                   <div className="mt-4 space-y-4">
-                    <h3 className="text-lg font-semibold text-deep-brown mb-3">📝 My Articles</h3>
                     {message.articles.map((article) => (
-                      <div key={article.id} className="border border-gray-200 rounded-xl p-4 bg-gradient-to-r from-white to-gray-50 shadow-sm hover:shadow-md transition-shadow">
+                      <div key={article.id} className="border border-gray-200 rounded-xl p-4 bg-gradient-to-r from-white to-gray-50 shadow-sm hover:shadow-md transition-all duration-200">
                         <div className="flex items-start space-x-4">
-                          <div className="w-14 h-14 bg-gradient-to-br from-sarya-purple to-sky-blue rounded-lg flex items-center justify-center flex-shrink-0">
-                            <FileText className="w-7 h-7 text-white" />
+                          <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75S24 8.83 24 12z"/>
+                            </svg>
                           </div>
                           <div className="flex-1">
-                            <h4 className="font-semibold text-deep-brown text-base mb-2">{article.title}</h4>
+                            <h4 className="font-semibold text-deep-brown text-lg mb-2 leading-tight">{article.title}</h4>
                             <p className="text-gray-600 text-sm mb-3">{article.description}</p>
                             <a 
                               href={article.url} 
                               target="_blank" 
                               rel="noopener noreferrer"
-                              className="text-sarya-purple text-sm hover:underline flex items-center space-x-1 inline-flex font-medium"
+                              className="inline-flex items-center space-x-2 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors text-sm font-medium"
                             >
+                              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75S24 8.83 24 12z"/>
+                              </svg>
                               <span>Read on Medium</span>
-                              <ExternalLink className="w-4 h-4" />
                             </a>
                           </div>
                         </div>

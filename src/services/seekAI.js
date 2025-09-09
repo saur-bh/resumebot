@@ -198,13 +198,13 @@ const generateFallbackResponse = (message) => {
     } else if (input.includes('website') || input.includes('portfolio')) {
       return "You can find more about me on my personal website at https://saur-bh.github.io/me/. It showcases my skills, experience, and projects. You can also find me on GitHub at https://github.com/saur-bh and Medium at https://medium.com/@_.saurabh.";
     } else if (input.includes('resume') || input.includes('download')) {
-      return "Yes! You can download my resume by going to the Settings page (click the settings icon) and clicking the 'Download Resume' button. The resume is available as a PDF file with all my detailed experience, skills, and projects.";
+      return "Absolutely! 📄 You can download my resume by clicking the purple 'Resume' button in the header above. It's a comprehensive PDF with all my experience, skills, and projects.";
     } else {
       return "That's an interesting question! As a QA Engineer and Product Builder, I'd be happy to discuss this further. Could you be more specific about what you'd like to know about my experience, skills, or projects?";
     }
   } else {
     // Question is outside Saurabh's expertise
-    return "I have limited knowledge and focus on my QA engineering experience, testing methodologies, and the content I've shared. I'm not doing web search currently and have limited knowledge about topics outside my expertise, but I'll keep this in mind and update you later. You can also write to me at saurabh-verma@outlook.com for more detailed discussions!";
+    return "I focus on my QA engineering experience, testing methodologies, and the content I've shared. For topics outside my expertise, I'd be happy to discuss them via email at saurabh-verma@outlook.com! 😊\n\nTry asking me about:\n• My testing experience and skills\n• My automation videos\n• My articles on Medium\n• My approach to testing\n• How to download my resume";
   }
 };
 

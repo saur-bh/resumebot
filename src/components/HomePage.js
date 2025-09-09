@@ -205,7 +205,7 @@ const HomePage = () => {
                 <h1 className="text-xl font-bold text-deep-brown">
                   Saurabh QA
                 </h1>
-                <p className="text-sm text-gray-600">Interactive Resume Chatbot</p>
+                <p className="text-sm text-gray-600"></p>
               </div>
             </motion.div>
             

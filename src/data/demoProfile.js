@@ -139,39 +139,39 @@ export const demoProfile = {
   commonQuestions: [
     {
       question: "Who are you?",
-      response: "I'm Saurabh, a QA Engineer and Product Builder with 15+ years of experience in software testing and quality assurance. I specialize in automation frameworks, manual testing, and release management across web, mobile, and backend systems. I'm passionate about ensuring software quality and building robust testing solutions."
+      response: "Hi! I'm Saurabh 👋 A QA Engineer and Product Builder with 15+ years of experience in software testing and quality assurance. I specialize in automation frameworks, manual testing, and release management across web, mobile, and backend systems. I'm passionate about ensuring software quality and building robust testing solutions that help teams deliver better products."
     },
     {
       question: "What do you do?",
-      response: "I'm a QA Engineer who focuses on ensuring software quality through manual testing, automation frameworks, and release management. I work with technologies like Selenium, Cypress, Playwright, Appium, WebDriverIO, and various CI/CD tools. I also contribute to end-to-end product development from design analysis to user stories creation."
+      response: "I'm a QA Engineer who focuses on ensuring software quality through manual testing, automation frameworks, and release management. I work with technologies like Selenium, Cypress, Playwright, Appium, WebDriverIO, and various CI/CD tools. I also contribute to end-to-end product development from design analysis to user stories creation. My goal is to help teams build better, more reliable software! 🚀"
     },
     {
       question: "What are your skills?",
-      response: "My technical skills include Selenium WebDriver, Cypress, Playwright, Appium, WebDriverIO, Jest, JavaScript, Python, Java, TestNG, Jenkins, GitHub Actions, CircleCI, Docker, AWS, Azure, Postman, BrowserStack, API Testing, Performance Testing, Mobile Testing, Manual Testing, TestRigor, Figma Design Analysis, CI/CD Pipelines, and Release Management."
+      response: "Here are my key technical skills:\n\n**Testing Frameworks:** Selenium WebDriver, Cypress, Playwright, Appium, WebDriverIO, Jest, TestNG\n\n**Programming:** JavaScript, Python, Java\n\n**CI/CD & DevOps:** Jenkins, GitHub Actions, CircleCI, Docker\n\n**Cloud & Tools:** AWS, Azure, Postman, BrowserStack, TestRigor\n\n**Testing Types:** API Testing, Performance Testing, Mobile Testing, Manual Testing\n\n**Product Development:** Figma Design Analysis, CI/CD Pipelines, Release Management\n\nI'm always learning and staying updated with the latest testing technologies! 💪"
     },
     {
       question: "Tell me about your experience",
-      response: "I have over 15+ years of experience in software testing and quality assurance. I've worked as a QA Engineer and Product Builder, ensuring software quality through manual testing, automation frameworks, and release management. I've led automation testing initiatives, built comprehensive test frameworks, implemented CI/CD pipelines, and contributed to end-to-end product development."
+      response: "I have over 15+ years of experience in software testing and quality assurance! 🎯\n\n**Current Role:** QA Engineer & Product Builder\n- Ensuring software quality through manual testing, automation frameworks, and release management\n- Working across web, mobile, and backend systems\n- Creating structured QA processes and integrating tools like Playwright, Appium, BrowserStack, Postman, Jira, and GitHub Actions\n- Contributing to end-to-end product development from Figma design analysis to user stories creation\n- Managing staging/production environments and setting up CI/CD pipelines\n\n**Previous Experience:**\n- Led automation testing initiatives for multiple projects\n- Built comprehensive test frameworks using Selenium, Cypress, and WebDriverIO\n- Implemented CI/CD pipelines with Jenkins, GitHub Actions, and CircleCI\n- Mentored junior QA engineers and conducted training sessions\n\nI thrive in fast-paced startup environments, ensuring bug-free releases and efficient workflows! ⚡"
     },
     {
       question: "How do you approach testing?",
-      response: "My testing approach involves creating structured QA processes, developing automation frameworks, implementing CI/CD pipelines, and ensuring bug-free releases. I focus on scalable and maintainable test solutions, working across web, mobile, and backend systems. I also analyze Figma designs, create user stories, and manage staging/production environments."
+      response: "My testing approach is comprehensive and methodical! 🧪\n\n**1. Test Planning & Strategy**\n- Analyze requirements and create comprehensive test strategies\n- Design test cases for functional, regression, and performance testing\n\n**2. Framework Development**\n- Build scalable and maintainable automation frameworks\n- Implement best practices for code reusability and maintainability\n\n**3. CI/CD Integration**\n- Set up automated test execution in CI/CD pipelines\n- Ensure tests run on every code commit and deployment\n\n**4. Cross-Platform Testing**\n- Web testing with Selenium, Cypress, Playwright\n- Mobile testing with Appium, WebDriverIO\n- API testing with Postman and custom frameworks\n\n**5. Quality Assurance**\n- Analyze Figma designs for testability\n- Create user stories and acceptance criteria\n- Manage staging/production environments\n\n**6. Continuous Improvement**\n- Monitor test results and optimize test suites\n- Stay updated with latest testing tools and methodologies\n\nI believe in building robust, maintainable test solutions that scale with the product! 🚀"
     },
     {
       question: "Show me your testing videos",
-      response: "I have several YouTube videos showcasing my testing style and automation work:\n\n1. **Cypress with CircleCI** - https://youtu.be/vE_4p5cLDco\n2. **Automating Bot using Simple JavaScript** - https://www.youtube.com/watch?v=hsghaUwMkbg\n3. **Mobile Automation using WebDriverIO** - https://youtu.be/1ODiJi2Sk6Y\n\nThese videos demonstrate my practical approach to automation testing and CI/CD integration."
+      response: "Here are my testing videos that showcase my automation expertise:"
     },
     {
       question: "What articles have you written?",
-      response: "I've written several Medium articles about testing and product development:\n\n1. **Test with Ease - Meet TestRigor** - https://medium.com/@_.saurabh/test-with-ease-meet-testrigor-e4960e56772d\n2. **Marvelous Tester - API Testing** - https://medium.com/@_.saurabh/marvelous-tester-24644dba1e95\n3. **Product Roadmap for Instamojo** - https://medium.com/@_.saurabh/product-roadmap-for-instamojo-3ebd5f892429\n\nThese articles cover testing tools, API testing strategies, and product roadmap planning."
+      response: "Here are my articles on testing and product development:"
     },
     {
       question: "Where can I find more about you?",
-      response: "You can find more about me on:\n\n• **Personal Website**: https://saur-bh.github.io/me/\n• **GitHub**: https://github.com/saur-bh\n• **Medium**: https://medium.com/@_.saurabh\n• **Email**: saurabh-verma@outlook.com\n• **Resume**: You can download my resume from the settings page\n\nFeel free to reach out if you'd like to discuss testing, automation, or product development!"
+      response: "Here's how you can connect with me:\n\n🌐 **Personal Website**: https://saur-bh.github.io/me/\n💻 **GitHub**: https://github.com/saur-bh\n📝 **Medium Articles**: https://medium.com/@_.saurabh\n📧 **Email**: saurabh-verma@outlook.com\n📄 **Resume**: Click the 'Resume' button in the header above\n\nI'm always excited to discuss testing, automation, and product development opportunities!"
     },
     {
       question: "Can I download your resume?",
-      response: "Yes! You can download my resume by going to the Settings page (click the settings icon) and clicking the 'Download Resume' button. The resume is available as a PDF file with all my detailed experience, skills, and projects."
+      response: "Absolutely! 📄 You can download my resume by clicking the purple 'Resume' button in the header above. It's a comprehensive PDF with all my experience, skills, and projects."
     },
     {
       question: "What if I ask something you don't know?",
