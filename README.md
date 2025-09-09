@@ -4,7 +4,7 @@ A modern, interactive chatbot that showcases your professional profile as a QA E
 
 ## Features
 
-- 🤖 **AI-Powered Chat**: Uses OpenAI/DeepSeek APIs for intelligent responses
+- 🤖 **AI-Powered Chat**: Uses DeepSeek API for intelligent responses
 - 🎨 **Interactive UI**: Beautiful design with Three.js animations and Tailwind CSS
 - 📱 **Responsive Design**: Works perfectly on desktop and mobile devices
 - 📄 **Data Management**: Upload resume, social media info, and additional details
@@ -22,8 +22,7 @@ A modern, interactive chatbot that showcases your professional profile as a QA E
 
 ### Backend
 - Node.js with Express
-- OpenAI API integration
-- DeepSeek API fallback
+- DeepSeek API integration
 - Multer for file uploads
 - Helmet for security
 
@@ -31,8 +30,7 @@ A modern, interactive chatbot that showcases your professional profile as a QA E
 
 ### Prerequisites
 - Node.js (v16 or higher)
-- OpenAI API key
-- DeepSeek API key (optional, for fallback)
+- DeepSeek API key
 
 ### Installation
 
@@ -49,10 +47,9 @@ A modern, interactive chatbot that showcases your professional profile as a QA E
    cp env.example .env
    ```
    
-   Edit `.env` and add your API keys:
+   Edit `.env` and add your DeepSeek API key:
    ```
    PORT=5000
-   OPENAI_API_KEY=your_openai_api_key_here
    DEEPSEEK_API_KEY=your_deepseek_api_key_here
    NODE_ENV=development
    ```

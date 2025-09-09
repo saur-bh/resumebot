@@ -1,10 +1,7 @@
-const OpenAI = require('openai');
-
 class AIService {
   constructor() {
-    this.openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY
-    });
+    this.apiKey = process.env.DEEPSEEK_API_KEY;
+    this.apiUrl = 'https://api.deepseek.com/v1/chat/completions';
     
     this.systemPrompt = `You are Saurabh, a passionate QA Engineer with expertise in software testing and quality assurance. You have a friendly, professional demeanor and love talking about testing methodologies, automation, and quality processes.
 
@@ -51,57 +48,25 @@ Remember: You are representing Saurabh's professional profile as a QA Engineer. 
         content: userMessage
       });
 
-      const completion = await this.openai.chat.completions.create({
-        model: 'gpt-3.5-turbo',
-        messages: messages,
-        max_tokens: 500,
-        temperature: 0.7,
-        presence_penalty: 0.1,
-        frequency_penalty: 0.1
-      });
-
-      return {
-        text: completion.choices[0].message.content,
-        model: 'gpt-3.5-turbo'
-      };
-
-    } catch (error) {
-      console.error('OpenAI API Error:', error);
-      
-      // Fallback response if API fails
-      return {
-        text: "I'm experiencing some technical difficulties right now, but I'm still here to help! As a QA engineer, I understand the importance of robust systems. Could you try asking your question again?",
-        model: 'fallback'
-      };
-    }
-  }
-
-  // Alternative method using DeepSeek (if OpenAI fails)
-  async generateResponseWithDeepSeek(userMessage, dataSource, conversationHistory = []) {
-    try {
-      const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+      const response = await fetch(this.apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.DEEPSEEK_API_KEY}`
+          'Authorization': `Bearer ${this.apiKey}`
         },
         body: JSON.stringify({
           model: 'deepseek-chat',
-          messages: [
-            {
-              role: 'system',
-              content: this.systemPrompt.replace('{dataSource}', dataSource)
-            },
-            ...conversationHistory,
-            {
-              role: 'user',
-              content: userMessage
-            }
-          ],
+          messages: messages,
           max_tokens: 500,
-          temperature: 0.7
+          temperature: 0.7,
+          presence_penalty: 0.1,
+          frequency_penalty: 0.1
         })
       });
+
+      if (!response.ok) {
+        throw new Error(`DeepSeek API error: ${response.status} ${response.statusText}`);
+      }
 
       const data = await response.json();
       
@@ -116,28 +81,20 @@ Remember: You are representing Saurabh's professional profile as a QA Engineer. 
 
     } catch (error) {
       console.error('DeepSeek API Error:', error);
-      throw error;
+      
+      // Fallback response if API fails
+      return {
+        text: "I'm experiencing some technical difficulties right now, but I'm still here to help! As a QA engineer, I understand the importance of robust systems. Could you try asking your question again?",
+        model: 'fallback'
+      };
     }
   }
+
 }
 
 module.exports = {
   generateResponse: async (userMessage, dataSource, conversationHistory) => {
     const aiService = new AIService();
-    
-    try {
-      return await aiService.generateResponse(userMessage, dataSource, conversationHistory);
-    } catch (error) {
-      // Try DeepSeek as fallback
-      try {
-        return await aiService.generateResponseWithDeepSeek(userMessage, dataSource, conversationHistory);
-      } catch (fallbackError) {
-        console.error('Both AI services failed:', fallbackError);
-        return {
-          text: "I'm having trouble connecting to my AI services right now. As a QA engineer, I know the importance of reliable systems! Please try again in a moment.",
-          model: 'error-fallback'
-        };
-      }
-    }
+    return await aiService.generateResponse(userMessage, dataSource, conversationHistory);
   }
 };
