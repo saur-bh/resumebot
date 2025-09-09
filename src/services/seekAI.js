@@ -179,7 +179,12 @@ const generateFallbackResponse = (message) => {
   
   // Check if it's about Saurabh's content
   if (isAboutSaurabh(message)) {
-    if (input.includes('who are you') || input.includes('introduce')) {
+    // Check for video requests FIRST
+    if (input.includes('video') || input.includes('youtube') || input.includes('show me') || input.includes('show') || input.includes('videos')) {
+      return "I have several YouTube videos showcasing my testing style and automation work:\n\n1. **Cypress with CircleCI** - https://youtu.be/vE_4p5cLDco\n2. **Automating Bot using Simple JavaScript** - https://www.youtube.com/watch?v=hsghaUwMkbg\n3. **Mobile Automation using WebDriverIO** - https://youtu.be/1ODiJi2Sk6Y\n\nThese videos demonstrate my practical approach to automation testing and CI/CD integration.";
+    } else if (input.includes('article') || input.includes('medium') || input.includes('written')) {
+      return "I've written several Medium articles about testing and product development:\n\n1. **Test with Ease - Meet TestRigor** - https://medium.com/@_.saurabh/test-with-ease-meet-testrigor-e4960e56772d\n2. **Marvelous Tester - API Testing** - https://medium.com/@_.saurabh/marvelous-tester-24644dba1e95\n3. **Product Roadmap for Instamojo** - https://medium.com/@_.saurabh/product-roadmap-for-instamojo-3ebd5f892429\n\nThese articles cover testing tools, API testing strategies, and product roadmap planning.";
+    } else if (input.includes('who are you') || input.includes('introduce')) {
       return "I'm Saurabh, a QA Engineer and Product Builder with 15+ years of experience in software testing and quality assurance. I specialize in automation frameworks, manual testing, and release management across web, mobile, and backend systems. I'm passionate about ensuring software quality and building robust testing solutions.";
     } else if (input.includes('experience') || input.includes('background')) {
       return "I have over 15+ years of experience in software testing and quality assurance. I've worked as a QA Engineer and Product Builder, ensuring software quality through manual testing, automation frameworks, and release management. I've led automation testing initiatives, built comprehensive test frameworks, implemented CI/CD pipelines, and contributed to end-to-end product development.";
@@ -191,10 +196,6 @@ const generateFallbackResponse = (message) => {
       return "I've worked on several exciting projects including e-commerce platform testing, mobile app testing, API testing frameworks, and performance testing implementations. Each project has helped me grow as a QA engineer and product builder.";
     } else if (input.includes('contact') || input.includes('reach')) {
       return "You can reach me through email at saurabh-verma@outlook.com, LinkedIn, GitHub, or my portfolio website at https://saur-bh.github.io/me/. I'm always open to discussing new opportunities and collaborations!";
-    } else if (input.includes('video') || input.includes('youtube')) {
-      return "I have several YouTube videos showcasing my testing style and automation work:\n\n1. **Cypress with CircleCI** - https://youtu.be/vE_4p5cLDco\n2. **Automating Bot using Simple JavaScript** - https://www.youtube.com/watch?v=hsghaUwMkbg\n3. **Mobile Automation using WebDriverIO** - https://youtu.be/1ODiJi2Sk6Y\n\nThese videos demonstrate my practical approach to automation testing and CI/CD integration.";
-    } else if (input.includes('article') || input.includes('medium')) {
-      return "I've written several Medium articles about testing and product development:\n\n1. **Test with Ease - Meet TestRigor** - https://medium.com/@_.saurabh/test-with-ease-meet-testrigor-e4960e56772d\n2. **Marvelous Tester - API Testing** - https://medium.com/@_.saurabh/marvelous-tester-24644dba1e95\n3. **Product Roadmap for Instamojo** - https://medium.com/@_.saurabh/product-roadmap-for-instamojo-3ebd5f892429\n\nThese articles cover testing tools, API testing strategies, and product roadmap planning.";
     } else if (input.includes('website') || input.includes('portfolio')) {
       return "You can find more about me on my personal website at https://saur-bh.github.io/me/. It showcases my skills, experience, and projects. You can also find me on GitHub at https://github.com/saur-bh and Medium at https://medium.com/@_.saurabh.";
     } else if (input.includes('resume') || input.includes('download')) {

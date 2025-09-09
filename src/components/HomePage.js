@@ -74,7 +74,20 @@ const HomePage = () => {
   const processMessageFrontend = (message, profileData) => {
     const input = message.toLowerCase();
     
-    // Check common questions first
+    // Handle video requests FIRST - before common questions
+    if (input.includes('video') || input.includes('youtube') || input.includes('testing videos') || 
+        input.includes('show me') || input.includes('show') || input.includes('videos')) {
+      return {
+        id: Date.now(),
+        type: 'bot',
+        content: "Here are my testing videos that showcase my automation expertise:",
+        timestamp: new Date(),
+        videos: profileData.youtubeVideos,
+        source: 'videos'
+      };
+    }
+    
+    // Check common questions after video/article checks
     const commonMatch = profileData?.commonQuestions?.find(qa => 
       input.includes(qa.question.toLowerCase().split(' ')[0]) ||
       (input.includes('who are you') && qa.question.includes('who are you')) ||
@@ -91,18 +104,6 @@ const HomePage = () => {
         content: commonMatch.response,
         timestamp: new Date(),
         source: 'common-question'
-      };
-    }
-    
-    // Handle video requests
-    if (input.includes('video') || input.includes('youtube') || input.includes('testing videos')) {
-      return {
-        id: Date.now(),
-        type: 'bot',
-        content: "Here are my testing videos:",
-        timestamp: new Date(),
-        videos: profileData.youtubeVideos,
-        source: 'videos'
       };
     }
     
