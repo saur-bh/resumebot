@@ -88,6 +88,19 @@ export const demoProfile = {
     medium: "https://medium.com/@_.saurabh"
   },
   
+  personalWebsite: {
+    url: "https://saur-bh.github.io/me/",
+    title: "Saurabh's Personal Website",
+    description: "A simple, clean website built with pure HTML, CSS, and JavaScript - no frameworks, no AI, just fundamental web technologies. Perfect for understanding how the web actually works!",
+    features: [
+      "Pure HTML/CSS/JavaScript",
+      "No frameworks or libraries",
+      "Responsive design",
+      "Clean, readable code",
+      "Web fundamentals showcase"
+    ]
+  },
+  
   apiSettings: {
     provider: 'openai',
     apiKey: '',
@@ -168,6 +181,10 @@ export const demoProfile = {
     {
       question: "Where can I find more about you?",
       response: "🌟 **Let's Connect!** Here are all the ways you can reach me and learn more about my work:\n\n**🌐 Portfolio & Work**\n• **Personal Website**: https://saur-bh.github.io/me/\n• **GitHub Projects**: https://github.com/saur-bh\n• **Medium Articles**: https://medium.com/@_.saurabh\n\n**📧 Direct Contact**\n• **Email**: saurabh-verma@outlook.com\n• **Resume**: Click the purple 'Resume' button above ⬆️\n\n**💬 What I Love Discussing**\n• Testing strategies & automation frameworks\n• Product development & quality assurance\n• CI/CD pipelines & DevOps practices\n• Career opportunities & collaborations\n\nI'm always excited to connect with fellow tech enthusiasts and discuss new opportunities! 🚀"
+    },
+    {
+      question: "Show me your personal website",
+      response: "🌐 **Check out my personal website!**\n\n**What makes it special:**\n• Built with **pure HTML, CSS, and JavaScript** - no frameworks!\n• **No AI, no complex libraries** - just fundamental web technologies\n• **Clean, readable code** that's perfect for learning\n• **Responsive design** that works on all devices\n• **Web fundamentals showcase** - see how the web actually works\n\n**Perfect for:**\n• Understanding web development basics\n• Learning HTML/CSS/JavaScript fundamentals\n• Seeing clean, simple code in action\n• Understanding responsive design principles\n\n🔗 **Visit**: https://saur-bh.github.io/me/\n\nIt's a great example of how beautiful websites can be built with just the basics! 💻✨"
     },
     {
       question: "Can I download your resume?",

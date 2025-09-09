@@ -28,9 +28,9 @@ const HomePage = () => {
           "Who are you?",
           "Show me your testing videos",
           "What articles have you written?",
+          "Show me your personal website",
           "Can I download your resume?",
-          "Where can I find more about you?",
-          "What are your skills?"
+          "Where can I find more about you?"
         ]
       }
     ]);
@@ -49,23 +49,23 @@ const HomePage = () => {
       case 'videos':
         return [
           "What articles have you written?",
+          "Show me your personal website",
           "What are your skills?",
-          "How do you approach testing?",
-          "Can I download your resume?"
+          "How do you approach testing?"
         ];
       case 'articles':
         return [
           "Show me your testing videos",
+          "Show me your personal website",
           "What are your skills?",
-          "How do you approach testing?",
-          "Where can I find more about you?"
+          "How do you approach testing?"
         ];
       case 'common-question':
         return [
           "Show me your testing videos",
           "What articles have you written?",
-          "Can I download your resume?",
-          "What are your skills?"
+          "Show me your personal website",
+          "Can I download your resume?"
         ];
       default:
         return baseSuggestions;
@@ -371,7 +371,7 @@ const HomePage = () => {
             {/* Quick Actions */}
             <div className="mt-4 flex flex-wrap gap-2">
               <span className="text-xs text-gray-500 mr-2">Quick actions:</span>
-              {['Who are you?', 'Show videos', 'My articles', 'Download resume'].map((action, index) => (
+              {['Who are you?', 'Show videos', 'My articles', 'Personal website', 'Download resume'].map((action, index) => (
                 <motion.button
                   key={index}
                   onClick={() => setInputValue(action)}
