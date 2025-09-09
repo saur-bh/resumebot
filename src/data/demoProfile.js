@@ -148,6 +148,17 @@ export const demoProfile = {
     }
   ],
   
+  certifications: [
+    {
+      id: 1,
+      title: "LinkedIn Certifications",
+      url: "https://www.linkedin.com/in/s-a-u-r-a-b-h/details/certifications/",
+      description: "View all my professional certifications and achievements",
+      issuer: "LinkedIn",
+      type: "Professional Certifications"
+    }
+  ],
+  
   commonQuestions: [
     {
       question: "Who are you?",
@@ -184,6 +195,10 @@ export const demoProfile = {
     {
       question: "Show me your personal website",
       response: "🌐 **Check out my personal website!**\n\n**What makes it special:**\n• Built with **pure HTML, CSS, and JavaScript** - no frameworks!\n• **No AI, no complex libraries** - just fundamental web technologies\n• **Clean, readable code** that's perfect for learning\n• **Responsive design** that works on all devices\n• **Web fundamentals showcase** - see how the web actually works\n\n**Perfect for:**\n• Understanding web development basics\n• Learning HTML/CSS/JavaScript fundamentals\n• Seeing clean, simple code in action\n• Understanding responsive design principles\n\n🔗 **Visit**: https://saur-bh.github.io/me/\n\nIt's a great example of how beautiful websites can be built with just the basics! 💻✨"
+    },
+    {
+      question: "Show me your certifications",
+      response: "🏆 **Here are my professional certifications!**\n\n**LinkedIn Certifications:**\n• View all my professional certifications and achievements\n• Continuous learning and skill development\n• Industry-recognized credentials\n• Professional growth and expertise validation\n\n🔗 **View Certifications**: https://www.linkedin.com/in/s-a-u-r-a-b-h/details/certifications/\n\nThese certifications demonstrate my commitment to continuous learning and professional development in the QA and testing field! 🎓"
     },
     {
       question: "Can I download your resume?",

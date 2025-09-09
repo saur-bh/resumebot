@@ -56,15 +56,22 @@ const HomePage = () => {
         return [
           "Show me your testing videos",
           "What articles have you written?",
-          "What are your skills?",
-          "How do you approach testing?"
+          "Show me your certifications",
+          "What are your skills?"
+        ];
+      case 'certifications':
+        return [
+          "Show me your testing videos",
+          "What articles have you written?",
+          "Show me your personal website",
+          "What are your skills?"
         ];
       case 'common-question':
         return [
           "Show me your testing videos",
           "What articles have you written?",
-          "Show me your personal website",
-          "Can I download your resume?"
+          "Show me your certifications",
+          "Show me your personal website"
         ];
       default:
         return baseSuggestions;
@@ -152,6 +159,20 @@ const HomePage = () => {
         articles: profileData.mediumPosts,
         source: 'articles',
         suggestions: getDynamicSuggestions('bot', 'articles')
+      };
+    }
+    
+    // Handle certification requests
+    if (input.includes('certification') || input.includes('certificate') || input.includes('cert') ||
+        input.includes('show me your certifications') || input.includes('linkedin certifications')) {
+      return {
+        id: Date.now(),
+        type: 'bot',
+        content: "🏆 **Here are my professional certifications!**",
+        timestamp: new Date(),
+        certifications: profileData.certifications,
+        source: 'certifications',
+        suggestions: getDynamicSuggestions('bot', 'certifications')
       };
     }
     
@@ -396,7 +417,7 @@ const HomePage = () => {
             {/* Quick Actions */}
             <div className="mt-4 flex flex-wrap gap-2">
               <span className="text-xs text-gray-500 mr-2">Quick actions:</span>
-              {['Who are you?', 'Show videos', 'My articles', 'Personal website', 'Download resume'].map((action, index) => (
+              {['Who are you?', 'Show videos', 'My articles', 'Certifications', 'Personal website', 'Download resume'].map((action, index) => (
                 <motion.button
                   key={index}
                   onClick={() => {
