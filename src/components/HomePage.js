@@ -26,13 +26,15 @@ const HomePage = () => {
       {
         id: 1,
         type: 'bot',
-        content: `Hello! I'm Saurabh, your interactive resume chatbot. Ask me anything about my QA engineering experience, skills, projects, or how I work! You can type or use voice input.`,
+        content: `Hello! I’m Saurabh 👋 — your interactive guide to know more about me. Ask me anything about my QA engineering experience, skills, projects, or the way I work. You can type or even use voice input!`,
         timestamp: new Date(),
         suggestions: [
           "Who are you?",
-          "What do you do?",
-          "What are your skills?",
-          "Tell me about your experience"
+          "Show me your testing videos",
+          "What articles have you written?",
+          "Can I download your resume?",
+          "Where can I find more about you?",
+          "What are your skills?"
         ]
       }
     ]);

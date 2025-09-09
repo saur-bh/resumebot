@@ -152,7 +152,7 @@ const ChatInterface = () => {
                 <MessageCircle className="w-8 h-8 text-white" />
               </motion.div>
               <h4 className="text-lg font-semibold text-deep-brown mb-2">
-                Welcome! I'm Saurabh's AI Assistant
+                Welcome! I'm Saurabh's 
               </h4>
               <p className="text-gray-600 mb-6">
                 Ask me anything about my testing experience, QA methodologies, or technical skills!

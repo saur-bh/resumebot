@@ -1,10 +1,32 @@
 // AI Integration Service
 // This file contains the integration logic for multiple AI providers
 
+import { demoProfile } from '../data/demoProfile.js';
+
 const API_ENDPOINTS = {
   openai: 'https://api.openai.com/v1/chat/completions',
   gemini: 'https://generativelanguage.googleapis.com/v1beta/models',
   deepseek: 'https://api.deepseek.com/v1/chat/completions'
+};
+
+// Keywords that indicate the question is about Saurabh's content
+const SAURABH_KEYWORDS = [
+  'saurabh', 'you', 'your', 'resume', 'experience', 'skills', 'testing', 'qa', 'automation',
+  'cypress', 'selenium', 'playwright', 'appium', 'webdriverio', 'javascript', 'python',
+  'api testing', 'mobile testing', 'ci/cd', 'github actions', 'circleci', 'jenkins',
+  'postman', 'browserstack', 'testrigor', 'figma', 'product', 'development',
+  'videos', 'youtube', 'medium', 'articles', 'website', 'portfolio', 'contact',
+  'email', 'linkedin', 'github', 'download', 'resume'
+];
+
+/**
+ * Check if message is about Saurabh's content
+ * @param {string} message - User message
+ * @returns {boolean} - True if about Saurabh's content
+ */
+const isAboutSaurabh = (message) => {
+  const lowerMessage = message.toLowerCase();
+  return SAURABH_KEYWORDS.some(keyword => lowerMessage.includes(keyword));
 };
 
 /**
@@ -17,10 +39,11 @@ const API_ENDPOINTS = {
 export const sendToAI = async (message, context = {}, apiSettings = {}) => {
   const { provider = 'openai', apiKey = '', model = 'gpt-3.5-turbo' } = apiSettings;
   
-  if (!apiKey) {
+  // If no API key or message is not about Saurabh, use fallback
+  if (!apiKey || !isAboutSaurabh(message)) {
     return {
       success: false,
-      error: 'API key not configured',
+      error: apiKey ? 'Question outside my expertise' : 'API key not configured',
       fallback: generateFallbackResponse(message),
     };
   }
@@ -147,27 +170,41 @@ Always be personal and professional, speaking as Saurabh the QA Engineer.`
 };
 
 /**
- * Generate a fallback response when Seek AI is unavailable
+ * Generate a fallback response when AI is unavailable or question is outside expertise
  * @param {string} message - The user's message
  * @returns {string} - Fallback response
  */
 const generateFallbackResponse = (message) => {
   const input = message.toLowerCase();
   
-  if (input.includes('who are you') || input.includes('introduce')) {
-    return "I'm Saurabh, a Senior QA Engineer and Automation Specialist. I'm passionate about creating robust testing frameworks and ensuring software quality. I specialize in automation testing, CI/CD pipelines, and building scalable test solutions.";
-  } else if (input.includes('experience') || input.includes('background')) {
-    return "I have over 5 years of experience in software testing and quality assurance. I've led automation testing initiatives, built comprehensive test frameworks, implemented CI/CD pipelines, and mentored junior QA engineers.";
-  } else if (input.includes('skill') || input.includes('technical')) {
-    return "My technical skills include Selenium WebDriver, Cypress, Jest, JavaScript, Python, Java, TestNG, Jenkins, GitHub Actions, Docker, AWS, Azure, Postman, Appium, API Testing, Performance Testing, and Mobile Testing.";
-  } else if (input.includes('automation') || input.includes('testing process')) {
-    return "My automation testing process involves test planning, framework design, implementation, CI/CD integration, detailed reporting, and continuous maintenance. I focus on creating scalable and maintainable test solutions.";
-  } else if (input.includes('project')) {
-    return "I've worked on several exciting projects including e-commerce platform testing, mobile app testing, API testing frameworks, and performance testing implementations. Each project has helped me grow as a QA engineer.";
-  } else if (input.includes('contact') || input.includes('reach')) {
-    return "You can reach me through email at saurabh.sept06@gmail.com, LinkedIn, GitHub, or my portfolio website. I'm always open to discussing new opportunities and collaborations!";
+  // Check if it's about Saurabh's content
+  if (isAboutSaurabh(message)) {
+    if (input.includes('who are you') || input.includes('introduce')) {
+      return "I'm Saurabh, a QA Engineer and Product Builder with 15+ years of experience in software testing and quality assurance. I specialize in automation frameworks, manual testing, and release management across web, mobile, and backend systems. I'm passionate about ensuring software quality and building robust testing solutions.";
+    } else if (input.includes('experience') || input.includes('background')) {
+      return "I have over 15+ years of experience in software testing and quality assurance. I've worked as a QA Engineer and Product Builder, ensuring software quality through manual testing, automation frameworks, and release management. I've led automation testing initiatives, built comprehensive test frameworks, implemented CI/CD pipelines, and contributed to end-to-end product development.";
+    } else if (input.includes('skill') || input.includes('technical')) {
+      return "My technical skills include Selenium WebDriver, Cypress, Playwright, Appium, WebDriverIO, Jest, JavaScript, Python, Java, TestNG, Jenkins, GitHub Actions, CircleCI, Docker, AWS, Azure, Postman, BrowserStack, API Testing, Performance Testing, Mobile Testing, Manual Testing, TestRigor, Figma Design Analysis, CI/CD Pipelines, and Release Management.";
+    } else if (input.includes('automation') || input.includes('testing process')) {
+      return "My testing approach involves creating structured QA processes, developing automation frameworks, implementing CI/CD pipelines, and ensuring bug-free releases. I focus on scalable and maintainable test solutions, working across web, mobile, and backend systems. I also analyze Figma designs, create user stories, and manage staging/production environments.";
+    } else if (input.includes('project')) {
+      return "I've worked on several exciting projects including e-commerce platform testing, mobile app testing, API testing frameworks, and performance testing implementations. Each project has helped me grow as a QA engineer and product builder.";
+    } else if (input.includes('contact') || input.includes('reach')) {
+      return "You can reach me through email at saurabh-verma@outlook.com, LinkedIn, GitHub, or my portfolio website at https://saur-bh.github.io/me/. I'm always open to discussing new opportunities and collaborations!";
+    } else if (input.includes('video') || input.includes('youtube')) {
+      return "I have several YouTube videos showcasing my testing style and automation work:\n\n1. **Cypress with CircleCI** - https://youtu.be/vE_4p5cLDco\n2. **Automating Bot using Simple JavaScript** - https://www.youtube.com/watch?v=hsghaUwMkbg\n3. **Mobile Automation using WebDriverIO** - https://youtu.be/1ODiJi2Sk6Y\n\nThese videos demonstrate my practical approach to automation testing and CI/CD integration.";
+    } else if (input.includes('article') || input.includes('medium')) {
+      return "I've written several Medium articles about testing and product development:\n\n1. **Test with Ease - Meet TestRigor** - https://medium.com/@_.saurabh/test-with-ease-meet-testrigor-e4960e56772d\n2. **Marvelous Tester - API Testing** - https://medium.com/@_.saurabh/marvelous-tester-24644dba1e95\n3. **Product Roadmap for Instamojo** - https://medium.com/@_.saurabh/product-roadmap-for-instamojo-3ebd5f892429\n\nThese articles cover testing tools, API testing strategies, and product roadmap planning.";
+    } else if (input.includes('website') || input.includes('portfolio')) {
+      return "You can find more about me on my personal website at https://saur-bh.github.io/me/. It showcases my skills, experience, and projects. You can also find me on GitHub at https://github.com/saur-bh and Medium at https://medium.com/@_.saurabh.";
+    } else if (input.includes('resume') || input.includes('download')) {
+      return "Yes! You can download my resume by going to the Settings page (click the settings icon) and clicking the 'Download Resume' button. The resume is available as a PDF file with all my detailed experience, skills, and projects.";
+    } else {
+      return "That's an interesting question! As a QA Engineer and Product Builder, I'd be happy to discuss this further. Could you be more specific about what you'd like to know about my experience, skills, or projects?";
+    }
   } else {
-    return "That's an interesting question! As a QA Engineer, I'd be happy to discuss this further. Could you be more specific about what you'd like to know about my experience or skills?";
+    // Question is outside Saurabh's expertise
+    return "I have limited knowledge and focus on my QA engineering experience, testing methodologies, and the content I've shared. I'm not doing web search currently and have limited knowledge about topics outside my expertise, but I'll keep this in mind and update you later. You can also write to me at saurabh-verma@outlook.com for more detailed discussions!";
   }
 };
 

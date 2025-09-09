@@ -93,6 +93,15 @@ const SettingsPage = ({ user }) => {
     setSaving(false);
   };
 
+  const handleDownloadResume = () => {
+    const link = document.createElement('a');
+    link.href = '/Resume.pdf';
+    link.download = 'Saurabh_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const handleLogout = async () => {
     await logout();
     navigate('/');
@@ -349,6 +358,19 @@ const SettingsPage = ({ user }) => {
                   />
                   <p className="text-xs text-gray-500 mt-1">
                     This content will be sent to the AI model to help answer questions about your resume
+                  </p>
+                </div>
+                
+                <div className="mt-4">
+                  <button
+                    onClick={handleDownloadResume}
+                    className="btn-primary flex items-center space-x-2"
+                  >
+                    <FileText className="w-4 h-4" />
+                    <span>Download Resume</span>
+                  </button>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Download Saurabh's resume as a PDF file
                   </p>
                 </div>
               </div>
