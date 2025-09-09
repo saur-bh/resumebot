@@ -69,56 +69,58 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
                 
                 {/* Display Videos */}
                 {message.videos && message.videos.length > 0 && (
-                  <div className="mt-4 space-y-4">
-                    {message.videos.map((video) => (
-                      <div key={video.id} className="border border-gray-200 rounded-xl p-4 bg-gradient-to-r from-white to-gray-50 shadow-sm hover:shadow-md transition-all duration-200">
-                        <div className="flex items-start space-x-4">
-                          {/* YouTube Thumbnail */}
-                          <div className="relative flex-shrink-0">
-                            <a 
-                              href={video.url} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="block"
-                            >
-                              <img
-                                src={`https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`}
-                                alt={video.title}
-                                className="w-48 h-36 object-cover rounded-lg shadow-sm hover:shadow-md transition-shadow"
-                                onError={(e) => {
-                                  e.target.src = `https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`;
-                                }}
-                              />
-                              {/* Play Button Overlay */}
-                              <div className="absolute inset-0 flex items-center justify-center">
-                                <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center shadow-lg hover:bg-red-700 transition-colors">
-                                  <svg className="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M8 5v14l11-7z"/>
-                                  </svg>
+                  <div className="mt-4 w-full">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 w-full">
+                      {message.videos.map((video) => (
+                        <div key={video.id} className="border border-gray-200 rounded-xl p-4 bg-gradient-to-r from-white to-gray-50 shadow-sm hover:shadow-md transition-all duration-200 w-full">
+                          <div className="w-full">
+                            {/* YouTube Thumbnail - Full Width */}
+                            <div className="relative w-full mb-3">
+                              <a 
+                                href={video.url} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="block w-full"
+                              >
+                                <img
+                                  src={`https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`}
+                                  alt={video.title}
+                                  className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                                  onError={(e) => {
+                                    e.target.src = `https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`;
+                                  }}
+                                />
+                                {/* Play Button Overlay */}
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center shadow-lg hover:bg-red-700 transition-colors">
+                                    <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                      <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                  </div>
                                 </div>
-                              </div>
-                            </a>
-                          </div>
-                          
-                          {/* Video Info */}
-                          <div className="flex-1">
-                            <h4 className="font-semibold text-deep-brown text-lg mb-2 leading-tight">{video.title}</h4>
-                            <p className="text-gray-600 text-sm mb-3">Click the thumbnail to watch on YouTube</p>
-                            <a 
-                              href={video.url} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center space-x-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm font-medium"
-                            >
-                              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                              </svg>
-                              <span>Watch on YouTube</span>
-                            </a>
+                              </a>
+                            </div>
+                            
+                            {/* Video Info */}
+                            <div className="w-full">
+                              <h4 className="font-semibold text-deep-brown text-lg mb-2 leading-tight">{video.title}</h4>
+                              <p className="text-gray-600 text-sm mb-3">Click the thumbnail to watch on YouTube</p>
+                              <a 
+                                href={video.url} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center space-x-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm font-medium w-full justify-center"
+                              >
+                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                                </svg>
+                                <span>Watch on YouTube</span>
+                              </a>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 )}
                 
@@ -216,23 +218,23 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
                 
                 {/* Display Website Webview */}
                 {message.website && (
-                  <div className="mt-4 p-4 bg-gradient-to-r from-soft-lavender/30 to-cloud-white rounded-xl border border-gray-100">
+                  <div className="mt-4 w-full">
                     <div className="flex items-center space-x-2 mb-3">
                       <span className="text-lg">🌐</span>
                       <span className="text-sm font-medium text-deep-brown">Personal Website Preview</span>
                     </div>
-                    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
+                    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm w-full">
                       <div className="bg-gray-100 px-4 py-2 border-b border-gray-200 flex items-center space-x-2">
                         <div className="flex space-x-1">
                           <div className="w-3 h-3 bg-red-400 rounded-full"></div>
                           <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
                           <div className="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        <div className="flex-1 bg-white rounded px-2 py-1 text-xs text-gray-600">
+                        <div className="flex-1 bg-white rounded px-2 py-1 text-xs text-gray-600 truncate">
                           {message.website.url}
                         </div>
                       </div>
-                      <div className="h-96">
+                      <div className="h-96 sm:h-[500px] md:h-[600px] lg:h-[700px]">
                         <iframe
                           src={message.website.url}
                           title={message.website.title}
@@ -242,7 +244,7 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
                         />
                       </div>
                     </div>
-                    <div className="mt-3 flex items-center justify-between">
+                    <div className="mt-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
                       <p className="text-xs text-gray-600">{message.website.description}</p>
                       <a 
                         href={message.website.url} 

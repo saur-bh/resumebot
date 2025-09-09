@@ -161,6 +161,10 @@ export const demoProfile = {
   
   commonQuestions: [
     {
+      question: "How are you?",
+      response: "I'm doing great, thank you for asking! 😊 I'm here and ready to help you learn more about my QA engineering experience and skills. What would you like to know more about me? You can ask about my testing videos, articles, certifications, skills, or any other aspect of my professional background!"
+    },
+    {
       question: "Who are you?",
       response: "Hi! I'm Saurabh 👋 A QA Engineer and Product Builder with 15+ years of experience in software testing and quality assurance. I specialize in automation frameworks, manual testing, and release management across web, mobile, and backend systems. I'm passionate about ensuring software quality and building robust testing solutions that help teams deliver better products."
     },
