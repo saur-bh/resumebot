@@ -43,14 +43,24 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
               <div className="prose prose-sm max-w-none">
                 <ReactMarkdown
                   components={{
-                    p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
-                    ul: ({ children }) => <ul className="list-disc list-inside mb-2 space-y-1">{children}</ul>,
-                    li: ({ children }) => <li className="text-sm">{children}</li>,
+                    p: ({ children }) => <p className="mb-3 last:mb-0 leading-relaxed">{children}</p>,
+                    ul: ({ children }) => <ul className="list-none mb-3 space-y-2">{children}</ul>,
+                    li: ({ children }) => <li className="text-sm flex items-start space-x-2">{children}</li>,
                     strong: ({ children }) => <strong className="font-semibold text-deep-brown">{children}</strong>,
                     code: ({ children }) => (
                       <code className="bg-gray-100 text-sarya-purple px-1 py-0.5 rounded text-xs">
                         {children}
                       </code>
+                    ),
+                    a: ({ href, children }) => (
+                      <a 
+                        href={href} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-sarya-purple hover:text-accent-purple underline decoration-2 underline-offset-2 hover:decoration-accent-purple transition-all duration-200"
+                      >
+                        {children}
+                      </a>
                     ),
                   }}
                 >
@@ -109,6 +119,98 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
                         </div>
                       </div>
                     ))}
+                  </div>
+                )}
+                
+                {/* Special Contact Information Display */}
+                {message.content && message.content.includes('Let\'s Connect!') && (
+                  <div className="mt-4 p-4 bg-gradient-to-br from-sarya-purple/5 to-accent-purple/5 rounded-xl border border-sarya-purple/20">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {/* Portfolio & Work */}
+                      <div className="space-y-3">
+                        <h4 className="font-semibold text-deep-brown flex items-center space-x-2">
+                          <span className="text-lg">🌐</span>
+                          <span>Portfolio & Work</span>
+                        </h4>
+                        <div className="space-y-2">
+                          <a 
+                            href="https://saur-bh.github.io/me/" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center space-x-2 p-2 bg-white rounded-lg hover:bg-gray-50 transition-colors border border-gray-200"
+                          >
+                            <span className="text-blue-500">🌐</span>
+                            <span className="text-sm font-medium text-deep-brown">Personal Website</span>
+                            <ExternalLink className="w-3 h-3 text-gray-400" />
+                          </a>
+                          <a 
+                            href="https://github.com/saur-bh" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center space-x-2 p-2 bg-white rounded-lg hover:bg-gray-50 transition-colors border border-gray-200"
+                          >
+                            <span className="text-gray-800">💻</span>
+                            <span className="text-sm font-medium text-deep-brown">GitHub Projects</span>
+                            <ExternalLink className="w-3 h-3 text-gray-400" />
+                          </a>
+                          <a 
+                            href="https://medium.com/@_.saurabh" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center space-x-2 p-2 bg-white rounded-lg hover:bg-gray-50 transition-colors border border-gray-200"
+                          >
+                            <span className="text-orange-500">📝</span>
+                            <span className="text-sm font-medium text-deep-brown">Medium Articles</span>
+                            <ExternalLink className="w-3 h-3 text-gray-400" />
+                          </a>
+                        </div>
+                      </div>
+                      
+                      {/* Direct Contact */}
+                      <div className="space-y-3">
+                        <h4 className="font-semibold text-deep-brown flex items-center space-x-2">
+                          <span className="text-lg">📧</span>
+                          <span>Direct Contact</span>
+                        </h4>
+                        <div className="space-y-2">
+                          <a 
+                            href="mailto:saurabh-verma@outlook.com" 
+                            className="flex items-center space-x-2 p-2 bg-white rounded-lg hover:bg-gray-50 transition-colors border border-gray-200"
+                          >
+                            <span className="text-blue-600">📧</span>
+                            <span className="text-sm font-medium text-deep-brown">saurabh-verma@outlook.com</span>
+                            <ExternalLink className="w-3 h-3 text-gray-400" />
+                          </a>
+                          <div className="flex items-center space-x-2 p-2 bg-gradient-to-r from-sarya-purple to-accent-purple text-white rounded-lg">
+                            <span className="text-white">📄</span>
+                            <span className="text-sm font-medium">Resume Available Above ⬆️</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* What I Love Discussing */}
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                      <h4 className="font-semibold text-deep-brown flex items-center space-x-2 mb-3">
+                        <span className="text-lg">💬</span>
+                        <span>What I Love Discussing</span>
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {[
+                          'Testing strategies & automation frameworks',
+                          'Product development & quality assurance',
+                          'CI/CD pipelines & DevOps practices',
+                          'Career opportunities & collaborations'
+                        ].map((topic, index) => (
+                          <span 
+                            key={index}
+                            className="px-3 py-1 bg-white text-sarya-purple text-xs font-medium rounded-full border border-sarya-purple/20 hover:bg-sarya-purple/5 transition-colors"
+                          >
+                            {topic}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 )}
                 

@@ -167,7 +167,7 @@ export const demoProfile = {
     },
     {
       question: "Where can I find more about you?",
-      response: "Here's how you can connect with me:\n\n🌐 **Personal Website**: https://saur-bh.github.io/me/\n💻 **GitHub**: https://github.com/saur-bh\n📝 **Medium Articles**: https://medium.com/@_.saurabh\n📧 **Email**: saurabh-verma@outlook.com\n📄 **Resume**: Click the 'Resume' button in the header above\n\nI'm always excited to discuss testing, automation, and product development opportunities!"
+      response: "🌟 **Let's Connect!** Here are all the ways you can reach me and learn more about my work:\n\n**🌐 Portfolio & Work**\n• **Personal Website**: https://saur-bh.github.io/me/\n• **GitHub Projects**: https://github.com/saur-bh\n• **Medium Articles**: https://medium.com/@_.saurabh\n\n**📧 Direct Contact**\n• **Email**: saurabh-verma@outlook.com\n• **Resume**: Click the purple 'Resume' button above ⬆️\n\n**💬 What I Love Discussing**\n• Testing strategies & automation frameworks\n• Product development & quality assurance\n• CI/CD pipelines & DevOps practices\n• Career opportunities & collaborations\n\nI'm always excited to connect with fellow tech enthusiasts and discuss new opportunities! 🚀"
     },
     {
       question: "Can I download your resume?",
