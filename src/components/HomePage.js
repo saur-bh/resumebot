@@ -384,7 +384,7 @@ const HomePage = () => {
                   key={index}
                   onClick={() => {
                     if (action === 'Personal website') {
-                      window.open('https://saur-bh.github.io/me/', '_blank');
+                      window.location.href = 'https://saur-bh.github.io/me/';
                     } else {
                       setInputValue(action);
                     }
