@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { User, FileText, Video, Image, ExternalLink } from 'lucide-react';
+import { User, FileText, Video, Image, ExternalLink, Sparkles } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 
 const ChatMessage = ({ message, onSuggestionClick }) => {
@@ -330,19 +330,25 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="flex flex-wrap gap-2 mt-3"
+              className="mt-4 p-4 bg-gradient-to-r from-soft-lavender/30 to-cloud-white rounded-xl border border-gray-100"
             >
-              {message.suggestions.map((suggestion, index) => (
-                <motion.button
-                  key={index}
-                  onClick={() => onSuggestionClick(suggestion)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-4 py-2 bg-gradient-to-r from-sarya-purple to-sky-blue text-white text-sm rounded-full transition-all duration-200 hover:shadow-md font-medium"
-                >
-                  {suggestion}
-                </motion.button>
-              ))}
+              <div className="flex items-center space-x-2 mb-3">
+                <Sparkles className="w-4 h-4 text-sarya-purple" />
+                <span className="text-sm font-medium text-deep-brown">You might also want to ask:</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {message.suggestions.map((suggestion, index) => (
+                  <motion.button
+                    key={index}
+                    onClick={() => onSuggestionClick(suggestion)}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-4 py-2 bg-white border border-sarya-purple/20 text-sarya-purple text-sm rounded-full hover:bg-sarya-purple hover:text-white hover:border-sarya-purple transition-all duration-200 shadow-sm hover:shadow-md"
+                  >
+                    {suggestion}
+                  </motion.button>
+                ))}
+              </div>
             </motion.div>
           )}
 

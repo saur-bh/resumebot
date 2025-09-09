@@ -36,6 +36,42 @@ const HomePage = () => {
     ]);
   }, []);
 
+  // Dynamic suggestions based on message type
+  const getDynamicSuggestions = (messageType, source) => {
+    const baseSuggestions = [
+      "Who are you?",
+      "What are your skills?",
+      "Tell me about your experience",
+      "Where can I find more about you?"
+    ];
+
+    switch (source) {
+      case 'videos':
+        return [
+          "What articles have you written?",
+          "What are your skills?",
+          "How do you approach testing?",
+          "Can I download your resume?"
+        ];
+      case 'articles':
+        return [
+          "Show me your testing videos",
+          "What are your skills?",
+          "How do you approach testing?",
+          "Where can I find more about you?"
+        ];
+      case 'common-question':
+        return [
+          "Show me your testing videos",
+          "What articles have you written?",
+          "Can I download your resume?",
+          "What are your skills?"
+        ];
+      default:
+        return baseSuggestions;
+    }
+  };
+
   const initializeSpeechRecognition = () => {
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -83,7 +119,8 @@ const HomePage = () => {
         content: "Here are my testing videos that showcase my automation expertise:",
         timestamp: new Date(),
         videos: profileData.youtubeVideos,
-        source: 'videos'
+        source: 'videos',
+        suggestions: getDynamicSuggestions('bot', 'videos')
       };
     }
     
@@ -96,7 +133,8 @@ const HomePage = () => {
         content: "Here are my articles on testing and product development:",
         timestamp: new Date(),
         articles: profileData.mediumPosts,
-        source: 'articles'
+        source: 'articles',
+        suggestions: getDynamicSuggestions('bot', 'articles')
       };
     }
     
@@ -116,7 +154,8 @@ const HomePage = () => {
         type: 'bot',
         content: commonMatch.response,
         timestamp: new Date(),
-        source: 'common-question'
+        source: 'common-question',
+        suggestions: getDynamicSuggestions('bot', 'common-question')
       };
     }
     
@@ -225,14 +264,38 @@ const HomePage = () => {
       </header>
 
       {/* Chat Container */}
-      <div className="relative z-10 max-w-4xl mx-auto px-4 py-8">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 py-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl shadow-xl border border-gray-100 min-h-[600px] flex flex-col overflow-hidden"
+          className="bg-white rounded-3xl shadow-2xl border border-gray-100 min-h-[700px] flex flex-col overflow-hidden backdrop-blur-sm"
         >
+          {/* Chat Header */}
+          <div className="bg-gradient-to-r from-sarya-purple to-accent-purple p-4 text-white">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                <img 
+                  src="/myphoto.png" 
+                  alt="Saurabh QA" 
+                  className="w-8 h-8 rounded-full object-cover"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                />
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg">Saurabh QA</h3>
+                <p className="text-sm opacity-90">QA Engineer & Product Builder</p>
+              </div>
+              <div className="ml-auto flex items-center space-x-2">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                <span className="text-xs">Online</span>
+              </div>
+            </div>
+          </div>
+
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto space-y-4 p-6">
+          <div className="flex-1 overflow-y-auto space-y-4 p-6 bg-gradient-to-b from-gray-50/50 to-white">
             <AnimatePresence>
               {messages.map((message) => (
                 <ChatMessage
@@ -262,7 +325,7 @@ const HomePage = () => {
           </div>
 
           {/* Input Area */}
-          <div className="border-t border-gray-100 bg-gray-50 p-4">
+          <div className="border-t border-gray-100 bg-gradient-to-r from-gray-50 to-white p-6">
             <div className="flex space-x-3">
               <div className="flex-1 relative">
                 <input
@@ -271,18 +334,18 @@ const HomePage = () => {
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                   placeholder="Ask me anything about my experience, skills, or projects..."
-                  className="w-full px-4 py-3 pr-20 bg-white border border-gray-200 rounded-xl focus:border-sarya-purple focus:ring-2 focus:ring-sarya-purple focus:ring-opacity-20 transition-all duration-200 text-sm"
+                  className="w-full px-6 py-4 pr-24 bg-white border-2 border-gray-200 rounded-2xl focus:border-sarya-purple focus:ring-4 focus:ring-sarya-purple focus:ring-opacity-10 transition-all duration-300 text-sm shadow-sm hover:shadow-md"
                 />
-                <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex space-x-1">
+                <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex space-x-2">
                   {speechSupported && (
                     <motion.button
                       onClick={toggleListening}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className={`p-2 rounded-lg transition-colors ${
+                      className={`p-3 rounded-xl transition-all duration-200 ${
                         isListening 
-                          ? 'text-friendly-red bg-red-50' 
-                          : 'text-sarya-purple hover:bg-soft-lavender'
+                          ? 'text-white bg-gradient-to-r from-friendly-red to-red-500 shadow-lg' 
+                          : 'text-sarya-purple hover:bg-soft-lavender hover:shadow-md'
                       }`}
                     >
                       {isListening ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
@@ -293,13 +356,34 @@ const HomePage = () => {
                     disabled={!inputValue.trim()}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="p-2 text-sarya-purple hover:bg-soft-lavender rounded-lg transition-colors disabled:opacity-50"
+                    className={`p-3 rounded-xl transition-all duration-200 ${
+                      inputValue.trim() 
+                        ? 'text-white bg-gradient-to-r from-sarya-purple to-accent-purple shadow-lg hover:shadow-xl' 
+                        : 'text-gray-400 bg-gray-100'
+                    }`}
                   >
                     <Send className="w-5 h-5" />
                   </motion.button>
                 </div>
               </div>
             </div>
+            
+            {/* Quick Actions */}
+            <div className="mt-4 flex flex-wrap gap-2">
+              <span className="text-xs text-gray-500 mr-2">Quick actions:</span>
+              {['Who are you?', 'Show videos', 'My articles', 'Download resume'].map((action, index) => (
+                <motion.button
+                  key={index}
+                  onClick={() => setInputValue(action)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-3 py-1 text-xs bg-white border border-gray-200 rounded-full hover:border-sarya-purple hover:text-sarya-purple transition-all duration-200"
+                >
+                  {action}
+                </motion.button>
+              ))}
+            </div>
+            
             {isListening && (
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
