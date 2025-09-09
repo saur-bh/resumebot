@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Sparkles, Bot, Mic, MicOff, Download } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import ChatMessage from './ChatMessage';
 import SimpleBackground from './SimpleBackground';
 import { demoProfile } from '../data/demoProfile';
@@ -10,7 +9,7 @@ const HomePage = () => {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [profileData, setProfileData] = useState(demoProfile);
+  const [profileData] = useState(demoProfile);
   const [isListening, setIsListening] = useState(false);
   const [speechSupported, setSpeechSupported] = useState(false);
   const messagesEndRef = useRef(null);
@@ -78,11 +77,11 @@ const HomePage = () => {
     // Check common questions first
     const commonMatch = profileData?.commonQuestions?.find(qa => 
       input.includes(qa.question.toLowerCase().split(' ')[0]) ||
-      input.includes('who are you') && qa.question.includes('who are you') ||
-      input.includes('what do you do') && qa.question.includes('what do you do') ||
-      input.includes('your skills') && qa.question.includes('skills') ||
-      input.includes('your experience') && qa.question.includes('experience') ||
-      input.includes('how do you') && qa.question.includes('how do you')
+      (input.includes('who are you') && qa.question.includes('who are you')) ||
+      (input.includes('what do you do') && qa.question.includes('what do you do')) ||
+      (input.includes('your skills') && qa.question.includes('skills')) ||
+      (input.includes('your experience') && qa.question.includes('experience')) ||
+      (input.includes('how do you') && qa.question.includes('how do you'))
     );
     
     if (commonMatch) {

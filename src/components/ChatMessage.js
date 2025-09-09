@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Bot, User, FileText, Video, Image, ExternalLink } from 'lucide-react';
+import { User, FileText, Video, Image, ExternalLink } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 
 const ChatMessage = ({ message, onSuggestionClick }) => {
