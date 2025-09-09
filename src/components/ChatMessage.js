@@ -48,6 +48,73 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
                 >
                   {message.content}
                 </ReactMarkdown>
+                
+                {/* Display Videos */}
+                {message.videos && message.videos.length > 0 && (
+                  <div className="mt-4 space-y-3">
+                    {message.videos.map((video) => (
+                      <div key={video.id} className="border border-gray-200 rounded-lg p-3 bg-white">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-16 h-12 bg-gray-100 rounded flex items-center justify-center">
+                            <Video className="w-6 h-6 text-gray-500" />
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="font-medium text-deep-brown text-sm">{video.title}</h4>
+                            <a 
+                              href={video.url} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="text-sarya-purple text-xs hover:underline flex items-center space-x-1"
+                            >
+                              <span>Watch on YouTube</span>
+                              <ExternalLink className="w-3 h-3" />
+                            </a>
+                          </div>
+                        </div>
+                        <div className="mt-2">
+                          <iframe
+                            width="100%"
+                            height="200"
+                            src={`https://www.youtube.com/embed/${video.videoId}`}
+                            title={video.title}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            className="rounded"
+                          ></iframe>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                
+                {/* Display Articles */}
+                {message.articles && message.articles.length > 0 && (
+                  <div className="mt-4 space-y-3">
+                    {message.articles.map((article) => (
+                      <div key={article.id} className="border border-gray-200 rounded-lg p-3 bg-white">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-12 h-12 bg-gray-100 rounded flex items-center justify-center">
+                            <FileText className="w-6 h-6 text-gray-500" />
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="font-medium text-deep-brown text-sm">{article.title}</h4>
+                            <p className="text-gray-600 text-xs mt-1">{article.description}</p>
+                            <a 
+                              href={article.url} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="text-sarya-purple text-xs hover:underline flex items-center space-x-1 mt-2"
+                            >
+                              <span>Read on Medium</span>
+                              <ExternalLink className="w-3 h-3" />
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             ) : (
               <p className="text-sm">{message.content}</p>

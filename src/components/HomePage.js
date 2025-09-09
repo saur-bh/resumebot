@@ -1,32 +1,29 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Settings, Sparkles, Bot, Mic, MicOff } from 'lucide-react';
+import { Send, Sparkles, Bot, Mic, MicOff } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ChatMessage from './ChatMessage';
 import SimpleBackground from './SimpleBackground';
-import { getProfileData } from '../firebase/firestore';
-import { processMessageWithAI } from '../services/seekAI';
 import { demoProfile } from '../data/demoProfile';
 
 const HomePage = () => {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [profileData, setProfileData] = useState(null);
+  const [profileData, setProfileData] = useState(demoProfile);
   const [isListening, setIsListening] = useState(false);
   const [speechSupported, setSpeechSupported] = useState(false);
   const messagesEndRef = useRef(null);
   const recognitionRef = useRef(null);
 
   useEffect(() => {
-    loadProfileData();
     initializeSpeechRecognition();
     // Add welcome message
     setMessages([
       {
         id: 1,
         type: 'bot',
-        content: `Hello! I’m Saurabh 👋 — your interactive guide to know more about me. Ask me anything about my QA engineering experience, skills, projects, or the way I work. You can type or even use voice input!`,
+        content: `Hello! I'm Saurabh 👋 — your interactive guide to know more about me. Ask me anything about my QA engineering experience, skills, projects, or the way I work. You can type or even use voice input!`,
         timestamp: new Date(),
         suggestions: [
           "Who are you?",
@@ -70,20 +67,66 @@ const HomePage = () => {
     scrollToBottom();
   }, [messages]);
 
-  const loadProfileData = async () => {
-    try {
-      const data = await getProfileData();
-      // Use demo data if no profile data is available
-      setProfileData(data || demoProfile);
-    } catch (error) {
-      console.error('Error loading profile data:', error);
-      // Fallback to demo data
-      setProfileData(demoProfile);
-    }
-  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const processMessageFrontend = (message, profileData) => {
+    const input = message.toLowerCase();
+    
+    // Check common questions first
+    const commonMatch = profileData?.commonQuestions?.find(qa => 
+      input.includes(qa.question.toLowerCase().split(' ')[0]) ||
+      input.includes('who are you') && qa.question.includes('who are you') ||
+      input.includes('what do you do') && qa.question.includes('what do you do') ||
+      input.includes('your skills') && qa.question.includes('skills') ||
+      input.includes('your experience') && qa.question.includes('experience') ||
+      input.includes('how do you') && qa.question.includes('how do you')
+    );
+    
+    if (commonMatch) {
+      return {
+        id: Date.now(),
+        type: 'bot',
+        content: commonMatch.response,
+        timestamp: new Date(),
+        source: 'common-question'
+      };
+    }
+    
+    // Handle video requests
+    if (input.includes('video') || input.includes('youtube') || input.includes('testing videos')) {
+      return {
+        id: Date.now(),
+        type: 'bot',
+        content: "Here are my testing videos:",
+        timestamp: new Date(),
+        videos: profileData.youtubeVideos,
+        source: 'videos'
+      };
+    }
+    
+    // Handle article requests
+    if (input.includes('article') || input.includes('medium') || input.includes('written')) {
+      return {
+        id: Date.now(),
+        type: 'bot',
+        content: "Here are my articles:",
+        timestamp: new Date(),
+        articles: profileData.mediumPosts,
+        source: 'articles'
+      };
+    }
+    
+    // Default response
+    return {
+      id: Date.now(),
+      type: 'bot',
+      content: "I have limited knowledge and focus on my QA engineering experience, testing methodologies, and the content I've shared. I'm not doing web search currently and have limited knowledge about topics outside my expertise, but I'll keep this in mind and update you later. You can also write to me at saurabh-verma@outlook.com for more detailed discussions!",
+      timestamp: new Date(),
+      source: 'fallback'
+    };
   };
 
   const handleSendMessage = async () => {
@@ -100,53 +143,14 @@ const HomePage = () => {
     setInputValue('');
     setIsTyping(true);
 
-    // Get AI response from configured AI provider or fallback
-    try {
-      const botResponse = await processMessageWithAI(
-        inputValue, 
-        profileData, 
-        messages, 
-        profileData?.files || []
-      );
+    // Use frontend-only processing
+    setTimeout(() => {
+      const botResponse = processMessageFrontend(inputValue, profileData);
       setMessages(prev => [...prev, botResponse]);
-    } catch (error) {
-      console.error('Error getting AI response:', error);
-      // Fallback to local response
-      const botResponse = generateBotResponse(inputValue);
-      setMessages(prev => [...prev, botResponse]);
-    }
-    setIsTyping(false);
+      setIsTyping(false);
+    }, 1000);
   };
 
-  const generateBotResponse = (userInput) => {
-    const input = userInput.toLowerCase();
-    
-    // Simple response logic (replace with Seek AI integration)
-    let response = {
-      id: Date.now() + 1,
-      type: 'bot',
-      content: '',
-      timestamp: new Date(),
-      media: null
-    };
-
-    if (input.includes('experience') || input.includes('background')) {
-      response.content = "I have extensive experience in software testing and automation. I specialize in creating robust test frameworks, implementing CI/CD pipelines, and ensuring high-quality software delivery. I've worked with various technologies including Selenium, Cypress, Jest, and many more.";
-    } else if (input.includes('skill') || input.includes('technical')) {
-      response.content = "My technical skills include:\n\n• **Testing Frameworks**: Selenium, Cypress, Jest, TestNG\n• **Programming**: JavaScript, Python, Java, TypeScript\n• **CI/CD**: Jenkins, GitHub Actions, Docker\n• **Databases**: SQL, MongoDB, PostgreSQL\n• **Cloud**: AWS, Azure, Firebase\n• **Mobile Testing**: Appium, Detox\n• **API Testing**: Postman, REST Assured";
-    } else if (input.includes('automation') || input.includes('testing process')) {
-      response.content = "Here's how I approach automation testing:\n\n1. **Test Planning**: Analyze requirements and create comprehensive test strategies\n2. **Framework Design**: Build scalable and maintainable test frameworks\n3. **Implementation**: Write robust, reusable test scripts\n4. **Integration**: Set up CI/CD pipelines for automated execution\n5. **Reporting**: Generate detailed test reports and metrics\n6. **Maintenance**: Continuously improve and update test suites";
-      response.media = { type: 'video', url: '/videos/automation-process.mp4', title: 'Automation Testing Process' };
-    } else if (input.includes('project')) {
-      response.content = "I've worked on several exciting projects:\n\n• **E-commerce Platform Testing**: Built comprehensive test suite for a large-scale e-commerce platform\n• **Mobile App Testing**: Developed automated tests for iOS and Android applications\n• **API Testing Framework**: Created a robust API testing framework with detailed reporting\n• **Performance Testing**: Implemented load testing strategies for high-traffic applications";
-    } else if (input.includes('contact') || input.includes('reach')) {
-      response.content = "You can reach me through:\n\n• **Email**: your.email@example.com\n• **LinkedIn**: linkedin.com/in/yourprofile\n• **GitHub**: github.com/yourusername\n• **Portfolio**: yourportfolio.com\n\nI'm always open to discussing new opportunities and collaborations!";
-    } else {
-      response.content = "That's an interesting question! While I have information about my experience and skills, I'd be happy to discuss this further. Could you be more specific about what you'd like to know?";
-    }
-
-    return response;
-  };
 
   const handleSuggestionClick = (suggestion) => {
     setInputValue(suggestion);
@@ -196,15 +200,6 @@ const HomePage = () => {
               </div>
             </motion.div>
             
-            <Link to="/settings">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="p-2 text-sarya-purple hover:bg-soft-lavender rounded-lg transition-colors"
-              >
-                <Settings className="w-6 h-6" />
-              </motion.button>
-            </Link>
           </div>
         </div>
       </header>
