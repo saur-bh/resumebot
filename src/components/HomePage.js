@@ -262,36 +262,41 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-chat-bg relative overflow-hidden">
-      <SimpleBackground />
+    <div className="min-h-screen bg-dark-bg cyber-grid-bg relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-electric-blue opacity-10 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute top-3/4 right-1/4 w-48 h-48 bg-neon-pink opacity-10 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
+        <div className="absolute bottom-1/4 left-1/3 w-32 h-32 bg-lime-green opacity-10 rounded-full blur-3xl animate-float" style={{animationDelay: '4s'}}></div>
+      </div>
       
       {/* Header */}
-      <header className="relative z-10 bg-cloud-white bg-opacity-90 backdrop-blur-sm border-b border-gray-200">
+      <header className="relative z-10 glass-effect border-b border-border-glow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+          <div className="flex justify-between items-center h-20">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="flex items-center space-x-3"
+              className="flex items-center space-x-4"
             >
               <div className="relative">
                 {profileData?.profilePhoto ? (
                   <img
                     src={profileData.profilePhoto}
                     alt={profileData.name || 'Profile'}
-                    className="w-10 h-10 rounded-full object-cover border-2 border-sarya-purple"
+                    className="w-12 h-12 rounded-full object-cover border-2 border-electric-blue shadow-2xl animate-glow-pulse"
                   />
                 ) : (
-                  <div className="w-10 h-10 bg-gradient-to-r from-sarya-purple to-sky-blue rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-electric-blue to-neon-pink rounded-full flex items-center justify-center shadow-2xl animate-glow-pulse">
                     <Sparkles className="w-6 h-6 text-white" />
                   </div>
                 )}
               </div>
               <div>
-                <h1 className="text-xl font-bold text-deep-brown">
-                  Saurabh QA
+                <h1 className="text-2xl font-bold font-display gradient-text">
+                  Saurabh Verma
                 </h1>
-                <p className="text-sm text-gray-600"></p>
+                <p className="text-sm text-white text-opacity-80 font-medium">QA Engineer & Product Builder</p>
               </div>
             </motion.div>
             
@@ -300,10 +305,10 @@ const HomePage = () => {
               onClick={handleDownloadResume}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center space-x-2 px-4 py-2 bg-sarya-purple text-white rounded-lg hover:bg-opacity-90 transition-colors shadow-sm"
+              className="cyber-button text-white px-6 py-3 rounded-xl transition-all duration-300 flex items-center space-x-2 hover:scale-105"
             >
               <Download className="w-4 h-4" />
-              <span className="text-sm font-medium">Resume</span>
+              <span className="font-medium">Resume</span>
             </motion.button>
           </div>
         </div>
@@ -314,10 +319,10 @@ const HomePage = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-3xl shadow-2xl border border-gray-100 min-h-[700px] flex flex-col overflow-hidden backdrop-blur-sm"
+          className="glass-effect rounded-3xl min-h-[700px] flex flex-col overflow-hidden"
         >
           {/* Chat Header */}
-          <div className="bg-gradient-to-r from-sarya-purple to-accent-purple p-4 text-white">
+          <div className="bg-gradient-to-r from-electric-blue via-purple-rain to-neon-pink p-4 text-white relative overflow-hidden">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                 <img 
@@ -341,7 +346,7 @@ const HomePage = () => {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto space-y-4 p-6 bg-gradient-to-b from-gray-50/50 to-white">
+          <div className="flex-1 overflow-y-auto space-y-4 p-6 bg-gradient-to-b from-dark-bg/50 to-dark-bg">
             <AnimatePresence>
               {messages.map((message) => (
                 <ChatMessage
@@ -371,7 +376,7 @@ const HomePage = () => {
           </div>
 
           {/* Input Area */}
-          <div className="border-t border-gray-100 bg-gradient-to-r from-gray-50 to-white p-6">
+          <div className="border-t border-border-glow bg-glass-dark p-6">
             <div className="flex space-x-3">
               <div className="flex-1 relative">
                 <input
@@ -380,7 +385,7 @@ const HomePage = () => {
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                   placeholder="Ask me anything about my experience, skills, or projects..."
-                  className="w-full px-6 py-4 pr-24 bg-white border-2 border-gray-200 rounded-2xl focus:border-sarya-purple focus:ring-4 focus:ring-sarya-purple focus:ring-opacity-10 transition-all duration-300 text-sm shadow-sm hover:shadow-md"
+                  className="w-full px-6 py-4 pr-24 bg-glass-white border-2 border-electric-blue rounded-2xl focus:border-neon-pink focus:ring-4 focus:ring-neon-pink focus:ring-opacity-30 transition-all duration-300 text-sm shadow-sm hover:shadow-md backdrop-blur-md text-white placeholder-gray-400"
                 />
                 <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex space-x-2">
                   {speechSupported && (
@@ -404,8 +409,8 @@ const HomePage = () => {
                     whileTap={{ scale: 0.95 }}
                     className={`p-3 rounded-xl transition-all duration-200 ${
                       inputValue.trim() 
-                        ? 'text-white bg-gradient-to-r from-sarya-purple to-accent-purple shadow-lg hover:shadow-xl' 
-                        : 'text-gray-400 bg-gray-100'
+                        ? 'text-white bg-gradient-to-r from-electric-blue to-neon-pink shadow-lg hover:shadow-xl animate-glow-pulse' 
+                        : 'text-gray-400 bg-glass-white border border-border-glow'
                     }`}
                   >
                     <Send className="w-5 h-5" />
@@ -416,7 +421,7 @@ const HomePage = () => {
             
             {/* Quick Actions */}
             <div className="mt-4 flex flex-wrap gap-2">
-              <span className="text-xs text-gray-500 mr-2">Quick actions:</span>
+              <span className="text-xs text-white text-opacity-60 mr-2 font-medium">Quick actions:</span>
               {['Who are you?', 'Show videos', 'My articles', 'Certifications', 'Personal website', 'Download resume'].map((action, index) => (
                 <motion.button
                   key={index}
@@ -430,7 +435,7 @@ const HomePage = () => {
                   }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-3 py-1 text-xs bg-white border border-gray-200 rounded-full hover:border-sarya-purple hover:text-sarya-purple transition-all duration-200"
+                  className="px-3 py-1 text-xs bg-glass-white border border-border-glow rounded-full hover:border-electric-blue hover:text-electric-blue transition-all duration-200 text-white hover:shadow-lg hover:shadow-electric-blue/20"
                 >
                   {action}
                 </motion.button>

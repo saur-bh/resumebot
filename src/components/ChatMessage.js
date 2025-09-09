@@ -16,10 +16,10 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
     >
       <div className={`flex items-start space-x-3 max-w-[80%] ${isUser ? 'flex-row-reverse space-x-reverse' : ''}`}>
         {/* Avatar */}
-        <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
+        <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${
           isUser 
-            ? 'bg-sarya-purple' 
-            : 'bg-white border-2 border-sarya-purple'
+            ? 'bg-gradient-to-r from-electric-blue to-purple-rain shadow-lg animate-glow-pulse' 
+            : 'bg-gradient-to-r from-neon-pink to-cyber-orange shadow-lg animate-glow-pulse'
         }`}>
           {isUser ? (
             <User className="w-5 h-5 text-white" />
@@ -27,7 +27,7 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
             <img 
               src="/myphoto.png" 
               alt="Saurabh Verma" 
-              className="w-8 h-8 rounded-full object-cover"
+              className="w-10 h-10 rounded-full object-cover"
               onError={(e) => {
                 e.target.style.display = 'none';
                 e.target.nextSibling.style.display = 'block';
@@ -38,7 +38,7 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
 
         {/* Message Content */}
         <div className={`${isUser ? 'items-end' : 'items-start'} flex flex-col space-y-2`}>
-          <div className={`chat-bubble ${isUser ? 'chat-bubble-user' : 'chat-bubble-bot'}`}>
+          <div className={`chat-bubble ${isUser ? 'chat-bubble-user' : 'chat-bubble-bot'} backdrop-blur-md`}>
             {isBot ? (
               <div className="prose prose-sm max-w-none">
                 <ReactMarkdown
@@ -46,9 +46,9 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
                     p: ({ children }) => <p className="mb-3 last:mb-0 leading-relaxed">{children}</p>,
                     ul: ({ children }) => <ul className="list-none mb-3 space-y-2">{children}</ul>,
                     li: ({ children }) => <li className="text-sm flex items-start space-x-2">{children}</li>,
-                    strong: ({ children }) => <strong className="font-semibold text-deep-brown">{children}</strong>,
+                    strong: ({ children }) => <strong className="font-semibold text-white">{children}</strong>,
                     code: ({ children }) => (
-                      <code className="bg-gray-100 text-sarya-purple px-1 py-0.5 rounded text-xs">
+                      <code className="bg-glass-white text-electric-blue px-1 py-0.5 rounded text-xs border border-border-glow">
                         {children}
                       </code>
                     ),
@@ -57,7 +57,7 @@ const ChatMessage = ({ message, onSuggestionClick }) => {
                         href={href} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="text-sarya-purple hover:text-accent-purple underline decoration-2 underline-offset-2 hover:decoration-accent-purple transition-all duration-200"
+                        className="text-electric-blue hover:text-neon-pink underline decoration-2 underline-offset-2 hover:decoration-neon-pink transition-all duration-200"
                       >
                         {children}
                       </a>
