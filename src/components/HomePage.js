@@ -23,15 +23,7 @@ const HomePage = () => {
         id: 1,
         type: 'bot',
         content: `Hello! I'm Saurabh 👋 — your interactive guide to know more about me. Ask me anything about my QA engineering experience, skills, projects, or the way I work. You can type or even use voice input!`,
-        timestamp: new Date(),
-        suggestions: [
-          "Who are you?",
-          "Show me your testing videos",
-          "What articles have you written?",
-          "Show me your personal website",
-          "Can I download your resume?",
-          "Where can I find more about you?"
-        ]
+        timestamp: new Date()
       }
     ]);
   }, []);
