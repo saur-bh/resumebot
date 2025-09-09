@@ -374,7 +374,13 @@ const HomePage = () => {
               {['Who are you?', 'Show videos', 'My articles', 'Personal website', 'Download resume'].map((action, index) => (
                 <motion.button
                   key={index}
-                  onClick={() => setInputValue(action)}
+                  onClick={() => {
+                    if (action === 'Personal website') {
+                      window.open('https://saur-bh.github.io/me/', '_blank');
+                    } else {
+                      setInputValue(action);
+                    }
+                  }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-3 py-1 text-xs bg-white border border-gray-200 rounded-full hover:border-sarya-purple hover:text-sarya-purple transition-all duration-200"
